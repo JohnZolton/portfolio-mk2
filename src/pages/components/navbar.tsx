@@ -15,7 +15,7 @@ export const NavBar = () => {
           <Link
             href=""
             className="text-gray-300 hover:text-white hover:underline"
-          >Projects</Link>
+          >My Work</Link>
           <Link
             href=""
             className="text-slate-300 hover:text-white hover:underline"

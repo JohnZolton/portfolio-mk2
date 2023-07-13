@@ -24,11 +24,12 @@ export default function Home() {
           <HeroSection />
           <AboutSection />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-row flex-wrap justify-center">
+          <div className="flex flex-col">
           <ProjectTile
           title="Lyfter"
           description="Workout and exercise tracker with built in performance monitoring and program adjustment"
-          picture="pic here"
+          picture="/lyfter2.png"
           url="https://lyfter.vercel.app/"
           repo="https://github.com/JohnZolton/lyfter"
           stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk"
@@ -36,22 +37,25 @@ export default function Home() {
           <ProjectTile
           title="MyFitnessBuddy"
           description="Nutrition and activity tracker packed with quality of life features like automatic step tracking and meal planning"
-          picture="pic here"
+          picture="/fitnesspal2.png"
           repo="https://github.com/JohnZolton/fitness"
           url="https://nutritiontracker.bio/tracking/"
-          stack="Django, Postgres"
+          stack="Django, Postgres, Stripe, USDA API"
           />
           <ProjectTile
           title="FreeBay"
           description="Online Auction platform"
-          picture="pic here"
+          picture="freebay.png"
           repo="https://github.com/JohnZolton/freebay2"
           url="freebay.live"
           stack="Django, Postgres, AWS S3, Railway"
           />
         </div>
+          <TechList />
+          <div className="flex-flex-row flex-wrap">
+
         <div className="flex flex-col">
-          <div className="font-bold text-2xl">Smaller Projects</div>
+          <div className="font-bold text-2xl text-center">Projects</div>
           <ProjectTile
           title="Scribe"
           description="Real time voice-to-text transcription using open source AI models"
@@ -70,8 +74,14 @@ export default function Home() {
           repo="https://github.com/JohnZolton/floppy-bird"
           />
         </div>
+          <ProjectTile
+          title="This Website"
+          description="A modern, aesthetic portfolio website"
+          repo="https://github.com/JohnZolton/portfolio-mk2"
+          />
+          </div>
         <CourseList/>
-        <TechList />
+          </div>
       </PageLayout>
     </>
   );

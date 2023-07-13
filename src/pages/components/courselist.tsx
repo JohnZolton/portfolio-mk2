@@ -5,9 +5,9 @@ export function CourseList() {
     <div className="bg-slate-600 py-3 px-5 m-1 max-w-xl">
       <div className="text-center text-3xl font-semibold">Education</div>
           <CourseTile 
-            title="Algorithms" 
+            title="Algorithms Specialization" 
             institution="Standford"
-            description="Design and analysis of algorithms"/>
+            description="Analysis of algorithms from Divide and Conquer, to Graph Search, to Greedy Algorithms and Dynamic Programming"/>
           <CourseTile 
             title="Web Programming with Python and JavaScript" 
             institution="Harvard CS50"
