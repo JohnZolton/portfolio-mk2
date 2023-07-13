@@ -2,18 +2,19 @@
 interface ProtjectTileProps {
     title: string,
     description: string,
-    picture: string,
+    picture?: string,
     url?: string,
     repo?: string,
     stars?: number,
     forks?: number,
+    stack?: string,
 }
 
-export function ProjectTile({title, description, picture, url, repo, stars, forks}: ProtjectTileProps) {
+export function ProjectTile({title, description, picture, url, repo, stars, forks, stack}: ProtjectTileProps) {
   return (
     <div className="bg-slate-600 py-3 px-5 m-1 max-w-xl">
         <div className="flex flex-row">
-        <div className="w-24 h-24 bg-black">{picture}</div>
+        { picture && <div className="w-24 h-24 bg-black">{picture}</div>}
         <div className="ml-3">
         <div className="font-semibold text-xl">{title}</div>
         <div>{description}</div>
@@ -41,6 +42,7 @@ export function ProjectTile({title, description, picture, url, repo, stars, fork
 </a>
 
         }
+        { stack && <StackDisplay stack={stack}/>}
 
         </div>
         </div>
@@ -51,3 +53,18 @@ export function ProjectTile({title, description, picture, url, repo, stars, fork
 };
 
 export default ProjectTile;
+
+interface StackDisplayProps {
+    stack: string
+}
+function StackDisplay({stack}:StackDisplayProps){
+
+    const stackItems = stack.split(',')
+    return(
+        <div className="flex flex-row">
+            {stackItems.map((item)=>(
+                <div className="text-sm mx-1 bg-slate-700 rounded-md p-1">{item}</div>
+            ))}
+        </div>
+    )
+}
