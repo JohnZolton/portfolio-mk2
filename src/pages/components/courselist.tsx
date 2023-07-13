@@ -2,8 +2,9 @@ import CourseTile from "./coursetile";
 
 export function CourseList() {
   return (
-    <div className="bg-slate-600 py-3 px-5 m-1 max-w-xl">
+    <>
       <div className="text-center text-3xl font-semibold">Education</div>
+    <div className="bg-slate-600 py-3 px-5 m-1 max-w-xl">
           <CourseTile 
             title="Algorithms Specialization" 
             institution="Standford"
@@ -25,6 +26,7 @@ export function CourseList() {
             institution="Harvard CS50"
             />
     </div>
+    </>
   );
 };
 

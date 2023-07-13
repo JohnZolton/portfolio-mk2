@@ -7,7 +7,7 @@ export const NavBar = () => {
       <nav className="flex items-center justify-between p-3">
         <div className="flex space-x-6 pr-4">
           <Link
-            href="home"
+            href=""
             className="text-slate-300 hover:text-white hover:underline"
           >
             Home

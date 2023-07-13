@@ -52,9 +52,10 @@ export default function Home() {
           />
         </div>
           <TechList />
-          <div className="flex-flex-row flex-wrap">
+          </div>
+          <div className="flex flex-col md:flex-row justify-center">
 
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center w-full">
           <div className="font-bold text-2xl text-center">Projects</div>
           <ProjectTile
           title="Scribe"
@@ -62,26 +63,29 @@ export default function Home() {
           repo="https://github.com/JohnZolton/scribe"
           stars={39}
           forks={13}
+          stack="Python, Whisper"
           />
           <ProjectTile
           title="AudioBooker"
           description="PDF and text file to audio converter using the open source AI model Bark"
           repo="https://github.com/JohnZolton/pdf-2-mp3"
+          stack="Python, Bark"
           />
           <ProjectTile
           title="Floppy Bird"
           description="A modern take on a timeless classic"
           repo="https://github.com/JohnZolton/floppy-bird"
+          stack="JavaScript, HTML, CSS"
           />
-        </div>
           <ProjectTile
           title="This Website"
           description="A modern, aesthetic portfolio website"
           repo="https://github.com/JohnZolton/portfolio-mk2"
+          stack="Next.Js, React, TypeScript, Tailwind"
           />
+        </div>
           </div>
         <CourseList/>
-          </div>
       </PageLayout>
     </>
   );

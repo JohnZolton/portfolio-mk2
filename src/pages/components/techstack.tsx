@@ -7,7 +7,7 @@ export function TechList() {
         <div>
             <div>The T3-Stack</div>
             <StackDisplay 
-            stack="Next Js, React, tRPC, Prisma, Tailwind, Clerk"
+            stack="Next Js, React, TypeScript, tRPC, Prisma, Tailwind, Clerk"
             />
         </div>
         <div>
