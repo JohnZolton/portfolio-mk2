@@ -20,7 +20,7 @@ export default function Home() {
       </Head>
       <PageLayout>
         <NavBar />
-        <div className="m-5 flex flex-row">
+          <div className="m-4 flex flex-col sm:flex-row">
           <HeroSection />
           <AboutSection />
         </div>
