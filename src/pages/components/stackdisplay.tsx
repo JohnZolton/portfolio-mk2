@@ -1,19 +1,24 @@
-
-
 interface StackDisplayProps {
-    stack: string
+  stack: string;
 }
-function StackDisplay({stack}:StackDisplayProps){
-    if (!stack){return(<div></div>)}
+function StackDisplay({ stack }: StackDisplayProps) {
+  if (!stack) {
+    return <div></div>;
+  }
 
-    const stackItems = stack.split(',')
-    return(
-        <div className="flex flex-row flex-wrap">
-            {stackItems.map((item)=>(
-                <div key={item} className="text-sm m-0.5 bg-slate-700 rounded-md p-1 truncate">{item}</div>
-            ))}
+  const stackItems = stack.split(",");
+  return (
+    <div className="flex flex-row flex-wrap">
+      {stackItems.map((item) => (
+        <div
+          key={item}
+          className="m-0.5 truncate rounded-md bg-slate-700 p-1 text-sm"
+        >
+          {item}
         </div>
-    )
+      ))}
+    </div>
+  );
 }
 
-export default StackDisplay
+export default StackDisplay;

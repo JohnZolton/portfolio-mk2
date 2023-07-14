@@ -8,6 +8,6 @@ const PageLayout = (props: PropsWithChildren) => {
       </div>
     </main>
   );
-}
+};
 
-export default PageLayout
+export default PageLayout;
