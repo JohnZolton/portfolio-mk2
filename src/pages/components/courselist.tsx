@@ -28,6 +28,6 @@ export function CourseList() {
     </div>
     </>
   );
-};
+}
 
 export default CourseList;

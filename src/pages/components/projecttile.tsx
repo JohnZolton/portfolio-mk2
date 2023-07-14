@@ -1,4 +1,5 @@
 import StackDisplay from "./stackdisplay";
+import Image from "next/image";
 
 interface ProtjectTileProps {
   title: string;
@@ -24,7 +25,16 @@ export function ProjectTile({
   return (
     <div className="m-1 w-full max-w-xl rounded-2xl border border-transparent bg-slate-600 px-5 py-3 hover:border-white hover:bg-slate-500">
       <div className="flex flex-col sm:flex-row items-center">
-        {picture && <img className="h-32 w-48" src={picture} alt={title} />}
+        {picture && 
+        
+                        <Image
+                            src={picture}
+                            alt={title}
+                            width={300}
+                            height={200}
+                            objectFit="cover"
+                        />
+}
         <div className="ml-3">
           <div className="text-xl font-semibold">{title}</div>
           <div>{description}</div>

@@ -26,6 +26,6 @@ export function CourseTile({title, description, repo, institution}: CourseTilePr
         </div>
     </div>
   );
-};
+}
 
 export default CourseTile;

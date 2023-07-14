@@ -1,12 +1,9 @@
-import styles from "./index.module.css";
 import Head from "next/head";
-import Link from "next/link";
 import NavBar from "./components/navbar";
 import PageLayout from "./components/pagelayout";
 import HeroSection from "./components/hero";
 import AboutSection from "./components/about";
 import ProjectTile from "./components/projecttile";
-import CourseTile from "./components/coursetile";
 import CourseList from "./components/courselist";
 import TechList from "./components/techstack";
 

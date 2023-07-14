@@ -14,11 +14,11 @@ function Murph(){
     return(
         <PageLayout>
             <NavBar></NavBar>
-                <div className="flex flex-row gap-4 m-4 flex-wrap mx-auto justify-center">
-                {imageFiles && imageFiles.map((column)=>(
-                    <div className="flex flex-col">
+            <div className="flex flex-row flex-wrap justify-center">
+                {imageFiles && imageFiles.map((column, index)=>(
+                    <div className="flex flex-col" key={index}>
                     {column && column.map((image)=> (
-                        <div className="m-3 rounded-xl overflow-hidden transform transition-transform duration-500 ease-in-out hover:scale-105">
+                                                    <div key={image} className="m-3 rounded-xl overflow-hidden flex-shrink-0 transform transition-transform duration-500 ease-in-out hover:scale-105">
                         <Image
                             src={`/murph/${image}`}
                             alt={image}

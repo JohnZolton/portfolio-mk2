@@ -24,6 +24,6 @@ export function TechList() {
         </div>
     </div>
   );
-};
+}
 
 export default TechList;
