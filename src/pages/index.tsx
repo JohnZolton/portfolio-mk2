@@ -40,7 +40,7 @@ export default function Home() {
           picture="/fitnesspal2.png"
           repo="https://github.com/JohnZolton/fitness"
           url="https://nutritiontracker.bio/tracking/"
-          stack="Django, Postgres, Stripe, USDA API"
+          stack="Django, Postgres, Stripe, USDA API, Smartwatch API"
           />
           <ProjectTile
           title="FreeBay"
@@ -75,6 +75,7 @@ export default function Home() {
           title="Floppy Bird"
           description="A modern take on a timeless classic"
           repo="https://github.com/JohnZolton/floppy-bird"
+          url="https://floppybirddemo.github.io/"
           stack="JavaScript, HTML, CSS"
           />
           <ProjectTile

@@ -3,11 +3,10 @@ import Link from "next/link";
 
 export const NavBar = () => {
   return (
-    <div>
-      <nav className="flex items-center justify-between p-3">
+      <nav className="flex items-center justify-between p-3 max-w-full flex-wrap">
         <div className="flex space-x-6 pr-4">
           <Link
-            href=""
+            href="/"
             className="text-slate-300 hover:text-white hover:underline"
           >
             Home
@@ -40,7 +39,6 @@ export const NavBar = () => {
           </a>
         </div>
       </nav>
-    </div>
   );
 };
 
