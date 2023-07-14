@@ -28,11 +28,10 @@ export function ProjectTile({
         {picture && 
         
                         <Image
-                            src={picture}
+                            src={`/${picture}`}
                             alt={title}
                             width={300}
                             height={200}
-                            objectFit="cover"
                         />
 }
         <div className="ml-3">

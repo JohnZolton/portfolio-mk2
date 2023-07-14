@@ -26,7 +26,7 @@ export default function Home() {
           <ProjectTile
           title="Lyfter"
           description="Workout and exercise tracker with built in performance monitoring and program adjustment"
-          picture="/lyfter2.png"
+          picture="lyfter2.png"
           url="https://lyfter.vercel.app/"
           repo="https://github.com/JohnZolton/lyfter"
           stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk"
@@ -34,7 +34,7 @@ export default function Home() {
           <ProjectTile
           title="MyFitnessBuddy"
           description="Nutrition and activity tracker packed with quality of life features like automatic step tracking and meal planning"
-          picture="/fitnesspal2.png"
+          picture="fitnesspal2.png"
           repo="https://github.com/JohnZolton/fitness"
           url="https://nutritiontracker.bio/tracking/"
           stack="Django, Postgres, Stripe, USDA API, Smartwatch API"
