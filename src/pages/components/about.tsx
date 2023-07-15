@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const AboutSection = () => {
   return (
-    <div className="max-w-lg bg-slate-600 p-10 sm:p-10">
+    <div className="max-w-lg  p-10 sm:p-10">
       <div className="flex flex-col gap-4">
         <div className="text-lg">
           It all started with degenerate crypto arbitrage bots. I instantly fell

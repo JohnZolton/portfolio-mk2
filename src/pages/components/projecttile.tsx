@@ -24,7 +24,7 @@ export function ProjectTile({
   stack,
 }: ProtjectTileProps) {
   return (
-    <div className="m-1 w-full max-w-xl rounded-2xl border border-transparent bg-slate-600 px-5 py-3 transition duration-300 hover:border-white hover:bg-slate-500">
+    <div className="m-1 w-full max-w-xl rounded-2xl border bg-cyan-950 border-transparent  px-3 py-1 transition duration-300 hover:border-white hover:bg-cyan-900">
       <div className="flex flex-col items-center sm:flex-row">
         {picture && (
           <Image src={`/${picture}`} alt={title} width={300} height={200} />

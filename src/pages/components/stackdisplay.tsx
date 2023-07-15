@@ -12,7 +12,7 @@ function StackDisplay({ stack }: StackDisplayProps) {
       {stackItems.map((item) => (
         <div
           key={item}
-          className="m-0.5 truncate rounded-md bg-slate-700 p-1 text-sm"
+          className="m-0.5 truncate rounded-lg bg-pink-800 p-1 text-sm"
         >
           {item}
         </div>

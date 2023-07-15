@@ -2,7 +2,7 @@ import StackDisplay from "./stackdisplay";
 
 export function TechList() {
   return (
-    <div className="m-1 max-w-xl bg-slate-600 px-5 py-3 text-lg">
+    <div className="m-1 max-w-xl bg-cyan-950 px-5 py-3 text-lg max-h-80 rounded-2xl">
       <div className="text-2xl font-semibold">Tech Stack</div>
       <div>
         <div>The T3-Stack</div>

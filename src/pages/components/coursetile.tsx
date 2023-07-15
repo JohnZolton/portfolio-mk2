@@ -12,11 +12,11 @@ export function CourseTile({
   institution,
 }: CourseTileProps) {
   return (
-    <div className="m-1 max-w-xl bg-slate-600 px-5 py-3">
+    <div className="m-1 max-w-xl bg-cyan-950 rounded-2xl px-5 py-3">
       <div className="flex flex-row">
         <div className="ml-3">
           <div className="text-xl font-semibold">{title}</div>
-          <div>{institution}</div>
+          <div className="text-lg">{institution}</div>
           <div>{description}</div>
           <div className="mt-1 flex flex-row items-center">
             {repo && (

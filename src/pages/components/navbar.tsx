@@ -23,10 +23,17 @@ export const NavBar = () => {
           About
         </Link>
         <Link
+        legacyBehavior
           href=""
-          className="text-slate-300 hover:text-white hover:underline"
         >
+          <a
+          href="JohnZolton_Resume.pdf"
+          rel="noopener noreferrer"
+          target="_blank"
+          className="text-slate-300 hover:text-white hover:underline"
+          >
           Resum&eacute;
+          </a>
         </Link>
         <Link href="https://github.com/JohnZolton" legacyBehavior>
         <a target="_blank" rel="noopener noreferrer">
