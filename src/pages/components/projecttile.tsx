@@ -27,7 +27,7 @@ export function ProjectTile({
     <div className="m-1 w-full max-w-xl rounded-2xl border bg-cyan-950 border-transparent  px-3 py-1 transition duration-300 hover:border-white hover:bg-cyan-900">
       <div className="flex flex-col items-center sm:flex-row">
         {picture && (
-          <Image src={`/${picture}`} alt={title} width={300} height={200} />
+          <Image className="object-cover h-28 w-36" src={`/${picture}`} alt={title} width={300} height={200} />
         )}
         <div className="ml-3">
           <div className="text-xl font-semibold">{title}</div>

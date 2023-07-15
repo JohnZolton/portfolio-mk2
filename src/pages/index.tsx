@@ -41,7 +41,7 @@ export default function Home() {
             />
             <ProjectTile
               title="FreeBay"
-              description="Online Auction platform"
+              description="Online Auction platform featuring commenting on listings, watchlisting items, 2FA, and email and password resets"
               picture="freebay.png"
               repo="https://github.com/JohnZolton/freebay"
               url="https://freebay.live"
