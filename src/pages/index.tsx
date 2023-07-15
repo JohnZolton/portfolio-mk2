@@ -43,7 +43,7 @@ export default function Home() {
               title="FreeBay"
               description="Online Auction platform"
               picture="freebay.png"
-              repo="https://github.com/JohnZolton/freebay2"
+              repo="https://github.com/JohnZolton/freebay"
               url="https://freebay.live"
               stack="Django, Postgres, AWS S3, Railway"
             />
