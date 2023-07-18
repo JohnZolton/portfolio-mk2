@@ -1,29 +1,18 @@
-# Create T3 App
+# Portfolio mk2: [JohnZolton.dev](https://www.johnzolton.dev/)
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This repository contains the source code for my portfolio website. It is built with Next.js, React, TypeScript, and styled with Tailwind CSS. The architecture emphasizes component-driven design and displays a modern aesthetic.
 
-## What's next? How do I make an app with this?
+---
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Technologies Used
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **Next.js**: A powerful React framework that simplifies the development process and improves performance.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: An open-source language that builds on JavaScript by adding static type definitions.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+---
 
-## Learn More
+## Component Driven Design
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-# portfolio-mk2
+This website adheres to the principles of Component-Driven Design (CDD). With CDD, we break down the design into reusable components, each responsible for a single functionality, resulting in a modular and maintainable codebase. The components are self-contained, reusable, and easy to test.
