@@ -11,17 +11,9 @@ export const NavBar = () => {
           Home
         </Link>
         <Link
-          href=""
+          href="projectarchive"
           className="text-gray-300 hover:text-white hover:underline"
-        >
-          My Work
-        </Link>
-        <Link
-          href=""
-          className="text-slate-300 hover:text-white hover:underline"
-        >
-          About
-        </Link>
+        >Archives</Link>
         <Link
         legacyBehavior
           href=""
