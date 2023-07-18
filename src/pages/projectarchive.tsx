@@ -1,6 +1,5 @@
 import NavBar from "./components/navbar";
 import PageLayout from "./components/pagelayout";
-import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
