@@ -9,33 +9,32 @@ function ProjectPage() {
   return (
     <PageLayout>
       <NavBar></NavBar>
-      <div className="flex flex-row flex-wrap justify-center">
-      Project Archive
-      <div className="bg-gradient-to-r from-cyan-950 to-gray-950 p-6 rounded-md shadow-lg">
-  <table className="table-auto w-full text-slate-200">
-    <thead>
-      <tr>
-        <th className="px-4 py-2 border-b-2 border-slate-200 text-left text-sm leading-4 tracking-wider">Title</th>
-        <th className="px-4 py-2 border-b-2 border-slate-200 text-left text-sm leading-4 tracking-wider">Description</th>
-        <th className="px-4 py-2 border-b-2 border-slate-200 text-left text-sm leading-4 tracking-wider">Code</th>
-        <th className="px-4 py-2 border-b-2 border-slate-200 text-left text-sm leading-4 tracking-wider">Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {projects.map((project, i) => (
-        <TableRow 
-          key={i}
-          title={project.title}
-          description={project.description}
-          github={project.github}
-          date={project.date}
-        />
-      ))}
-    </tbody>
-  </table>
-</div>
-
-      </div>
+  <div className="flex flex-col items-center justify-center w-full p-8 mx-auto mt-10 text-center bg-gradient-to-r from-cyan-950 to-gray-950 rounded-lg shadow-xl max-w-7xl">
+    <h1 className="mb-6 text-4xl font-semibold text-slate-200">Project Archive</h1>
+    <div className="overflow-x-auto bg-cyan-950 rounded-lg shadow-lg">
+      <table className="min-w-full text-slate-200">
+        <thead>
+          <tr className="text-lg leading-normal text-slate-200">
+            <th className="px-6 py-3 text-center border-b-2 border-slate-200">Title</th>
+            <th className="px-6 py-3 text-center border-b-2 border-slate-200">Description</th>
+            <th className="px-6 py-3 text-center border-b-2 border-slate-200">Code</th>
+            <th className="px-6 py-3 text-center border-b-2 border-slate-200">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((project, i) => (
+            <TableRow 
+              key={i}
+              title={project.title}
+              description={project.description}
+              github={project.github}
+              date={project.date}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
     </PageLayout>
   );
 }
@@ -51,27 +50,26 @@ interface ProjectInfo {
 
 function TableRow({title, description, github, date}: ProjectInfo){
     return (
-        <tr>
-            <td>{title}</td>
-            <td>{description}</td>
-            <td>
-                <Link legacyBehavior href={github}>
+        <tr className="text-base text-slate-200 text-left border-slate-200 border-b hover:bg-slate-700">
+            <td className="px-6 py-4   ">{title}</td>
+            <td className="px-6 py-4">{description}</td>
+            <td className="px-6 py-4 text-center   ">
                 <a 
+                href={github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white transition duration-300 hover:text-red-500">
-                  <FontAwesomeIcon icon={faGithub} />
+                  <FontAwesomeIcon icon={faGithub} size="lg"/>
                 </a>
-                </Link>
-                </td>
-            <td>{date}</td>
+            </td>
+            <td className="px-6 py-4">{date}</td>
         </tr>
     )
 }
 
 const projects: ProjectInfo[] = [
     {
-        title: "portfolio-mk2",
+        title: "Portfolio-mk2",
         description: "updated, modern portfolio with react and next.js",
         github: "https://github.com/JohnZolton/portfolio-mk2",
         date: 2023
@@ -83,37 +81,37 @@ const projects: ProjectInfo[] = [
         date: 2023
 },
     {
-        title: "pdf-2-mp3",
+        title: "Pdf-2-mp3",
         description: "convert long text and pdf files to mp3",
         github: "https://github.com/JohnZolton/pdf-2-mp3-two",
         date: 2023
 },
     {
-        title: "portfolio-mk1",
+        title: "Portfolio-mk1",
         description: "portfolio with vanilla javascript, html, css, art by stablediffusion",
         github: "https://github.com/JohnZolton/johnzolton.github.io",
         date: 2023
 },
     {
-        title: "freebay",
+        title: "Freebay",
         description: "auction website",
         github: "https://github.com/JohnZolton/freebay",
         date: 2023
 },
     {
-        title: "crypto-tracker",
+        title: "Crypto-tracker",
         description: "Privacy-centered SPA portfolio tracker using coingecko and local storage",
         github: "https://github.com/JohnZolton/crypto-tracker",
         date: 2023
 },
     {
-        title: "myfitnessbuddy",
+        title: "Myfitnessbuddy",
         description: "diet and acitivity tracking web-app integrating smart watch data and USDA api",
         github: "https://github.com/JohnZolton/fitness",
         date: 2023
 },
     {
-        title: "flobby bird",
+        title: "Floppy bird",
         description: "flappy bird browser game clone",
         github: "https://github.com/JohnZolton/flobby-bird",
         date: 2023
@@ -143,7 +141,7 @@ const projects: ProjectInfo[] = [
         date: 2022
 },
     {
-        title: "flashcards",
+        title: "Flashcards",
         description: "Flashcard desktop app with Python and tkinter",
         github: "https://github.com/JohnZolton/flashcards",
         date: 2022
@@ -162,7 +160,7 @@ const projects: ProjectInfo[] = [
 },
     {
         title: "Sentiment Analysis",
-        description: "Analyze sentiment analysis of tweets",
+        description: "Analyze sentiment of tweets with python",
         github: "https://github.com/JohnZolton/Sentiment-analysis",
         date: 2022
 },
