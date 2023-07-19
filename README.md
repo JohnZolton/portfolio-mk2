@@ -1,10 +1,10 @@
 # Portfolio mk2: [JohnZolton.dev](https://www.johnzolton.dev/)
 
-This repository contains the source code for my portfolio website. It is built with Next.js, React, TypeScript, and styled with Tailwind CSS. The architecture emphasizes component-driven design and displays a modern aesthetic.
+This repository contains the source code for my portfolio website. Built with Next.js, React, TypeScript, and styled with Tailwind CSS. The architecture emphasizes component-driven design and a modern aesthetic.
 
 ---
 
-## Technologies Used
+## Tech Stack
 
 - **Next.js**: A powerful React framework that simplifies the development process and improves performance.
 - **React**: A JavaScript library for building user interfaces.
@@ -13,6 +13,6 @@ This repository contains the source code for my portfolio website. It is built w
 
 ---
 
-## Component Driven Design
+## CDD
 
 This website adheres to the principles of Component-Driven Design (CDD). With CDD, we break down the design into reusable components, each responsible for a single functionality, resulting in a modular and maintainable codebase. The components are self-contained, reusable, and easy to test.
