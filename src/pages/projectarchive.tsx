@@ -7,7 +7,7 @@ function ProjectPage() {
   return (
     <PageLayout>
       <NavBar></NavBar>
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-lg  p-8 text-center shadow-xl">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-lg  p-8 text-center">
         <h1 className="mb-6 text-4xl font-semibold text-slate-200">
           Project Archive
         </h1>
