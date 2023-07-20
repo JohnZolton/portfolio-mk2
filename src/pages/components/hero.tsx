@@ -4,9 +4,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const HeroSection = () => {
-  const copyToClipboard = async () => {
-    await navigator.clipboard.writeText('jgz6@uakron.edu');
-    toast("Email copied to clipboard!");
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText('jgz6@uakron.edu').then(
+    ()=>toast("Email copied to clipboard!")
+    )
+    .catch((error)=> console.error("Copy failed", error))
   };
 
   return (
