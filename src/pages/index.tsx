@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col justify-center md:flex-row">
           <div className="flex w-full flex-col justify-center">
-            <div className="text-center text-2xl font-bold">Projects</div>
+      <div className="text-center text-3xl font-semibold my-3">Projects</div>
             <ProjectTile
               title="Scribe"
               description="Real time voice-to-text transcription using open source AI models"
