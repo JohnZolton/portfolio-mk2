@@ -33,12 +33,12 @@ export function ProjectTile({
     <div 
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
-    className={`my-1 w-full rounded-2xl border border-transparent bg-cyan-950  px-3 py-1 transition duration-300 ${ hovered ? ( hovered === title ? "": 'opacity-50') : ""}`}>
+    className={`my-1 w-full rounded-2xl border border-transparent bg-cyan-950  px-3 py-1 transition duration-300 ${ hovered ? ( hovered === title ? "border-white": 'opacity-50') : ""}`}>
       <div className="flex flex-col items-center sm:flex-row">
         {picture && (
-          <div className="h-28 w-44">
+          <div className={`h-28 w-44    ${hovered === title ? "  brightness-125   ": ''}`}>
           <Image
-            className="object-fill w-full h-full"
+          className= 'object-fill w-full h-full'
             src={`/${picture}`}
             alt={title}
             width={300}
@@ -87,7 +87,7 @@ export function ProjectTile({
               <div className="mr-1">
                 <Link legacyBehavior href={repo}>
                   <a target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-github fa-2x text-white transition duration-300 hover:text-red-500"></i>
+                    <i className="fab fa-github fa-2x text-slate-200 transition duration-300 hover:text-red-500"></i>
                   </a>
                 </Link>
               </div>

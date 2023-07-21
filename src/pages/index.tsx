@@ -39,7 +39,7 @@ function SmallProjects() {
       <div className="text-center text-3xl font-semibold my-3">Projects</div>
       <ProjectTile
         title="Scribe"
-        description="Real time voice-to-text transcription using open source AI models"
+        description="Real time voice-to-text transcription using the open source AI model Whisper"
         repo="https://github.com/JohnZolton/scribe"
         stars={39}
         forks={13}
@@ -80,8 +80,25 @@ function SmallProjects() {
 
         <Link
           href="projectarchive"
-          className="text-gray-300 hover:text-white hover:underline"
-        >Full Project Archive</Link>
+          className="text-gray-300 flex flex-row justify-center items-center gap-1 group hover:text-white hover:underline"
+        >Full Project Archive 
+        <svg 
+  aria-hidden="true"
+  fill="currentColor"
+  viewBox="0 0 20 20"
+  xmlns="http://www.w3.org/2000/svg"
+  height="1em"
+  width="1em"
+  className="transform transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-[-1px] group-hover:scale-125"
+>
+  <path 
+    fill-rule="evenodd" 
+    d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L11.586 11H3a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 011.414-1.414l4 4z" 
+    clip-rule="evenodd" 
+  />
+</svg>
+
+        </Link>
       </div>
     </>
   );
