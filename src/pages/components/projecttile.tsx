@@ -11,6 +11,9 @@ interface ProtjectTileProps {
   stars?: number;
   forks?: number;
   stack?: string;
+  hovered?: string;
+  onMouseEnter?: ()=>void;
+  onMouseLeave?: ()=>void;
 }
 
 export function ProjectTile({
@@ -22,9 +25,15 @@ export function ProjectTile({
   stars,
   forks,
   stack,
+  hovered,
+  onMouseEnter,
+  onMouseLeave
 }: ProtjectTileProps) {
   return (
-    <div className="m-1 w-full max-w-xl rounded-2xl border border-transparent bg-cyan-950  px-3 py-1 transition duration-300 hover:border-white">
+    <div 
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    className={`my-1 w-full rounded-2xl border border-transparent bg-cyan-950  px-3 py-1 transition duration-300 ${ hovered ? ( hovered === title ? "": 'opacity-50') : ""}`}>
       <div className="flex flex-col items-center sm:flex-row">
         {picture && (
           <div className="h-28 w-44">
@@ -105,7 +114,7 @@ export function ProjectTile({
                   <link
                     rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-                  />
+                  />                <i className="fas fa-globe fa-2x"></i>
                 </a>
               </Link>
             )}

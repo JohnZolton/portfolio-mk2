@@ -1,5 +1,4 @@
 import NavBar from "./components/navbar";
-import PageLayout from "./components/pagelayout";
 import Image from "next/image";
 
 function Murph() {
@@ -14,7 +13,7 @@ function Murph() {
   ];
 
   return (
-    <PageLayout>
+    <div className="flex justify-center flex-col items-center">
       <NavBar></NavBar>
       <div className="columns-1 gap-8 sm:columns-2 md:columns-3">
         {imageFiles &&
@@ -30,7 +29,7 @@ function Murph() {
             />
           ))}
       </div>
-    </PageLayout>
+    </div>
   );
 }
 

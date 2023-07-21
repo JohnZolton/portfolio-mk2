@@ -1,11 +1,11 @@
 import NavBar from "./components/navbar";
-import PageLayout from "./components/pagelayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 function ProjectPage() {
   return (
-    <PageLayout>
+    <div className="flex flex-col items-center justify-center">
+
       <NavBar></NavBar>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-lg  p-8 text-center">
         <h1 className="mb-6 text-4xl font-semibold text-slate-200">
@@ -43,7 +43,7 @@ function ProjectPage() {
           </table>
         </div>
       </div>
-    </PageLayout>
+    </div>
   );
 }
 
