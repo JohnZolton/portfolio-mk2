@@ -2,7 +2,7 @@ import CourseTile from "./coursetile";
 
 export function CourseList() {
   return (
-    <div className="mt-3">
+    <div className="mt-3 flex flex-col items-center">
       <div className="text-center text-3xl font-semibold">Education</div>
       <div className="m-1 max-w-xl  px-5 py-3">
         <CourseTile

@@ -2,17 +2,16 @@ import NavBar from "./components/navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-function ProjectPage() {
+function ProjectArchive() {
   return (
     <div className="flex flex-col items-center justify-center">
-
       <NavBar></NavBar>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-lg  p-8 text-center">
         <h1 className="mb-6 text-4xl font-semibold text-slate-200">
           Project Archive
         </h1>
         <div className="overflow-x-auto rounded-lg bg-cyan-950 shadow-lg">
-          <table className="min-w-full text-slate-200">
+          <table className="min-w-full text-slate-200 table-auto">
             <thead>
               <tr className="text-lg leading-normal text-slate-200">
                 <th className="border-b-2 border-slate-200 px-6 py-3 text-center">
@@ -47,7 +46,7 @@ function ProjectPage() {
   );
 }
 
-export default ProjectPage;
+export default ProjectArchive;
 
 interface ProjectInfo {
   title: string;
