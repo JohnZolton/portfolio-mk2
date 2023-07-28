@@ -19,7 +19,7 @@ export const AboutSection = () => {
           usually hiking a trail with my dog,{" "}
           <Link
             href="murph"
-            className="text-blue-300 hover:text-orange-200 hover:underline"
+            className="text-orange-300 hover:text-orange-200 hover:underline"
           >
             Murph
           </Link>

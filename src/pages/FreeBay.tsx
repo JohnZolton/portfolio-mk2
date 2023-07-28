@@ -6,7 +6,11 @@ function FreeBay() {
   return (
     <ProjectPage>
       <NavBar></NavBar>
-      <Project title="FreeBay" description="description coming soon" />
+      <Project title="FreeBay" 
+        paragraphs={[]}
+        repo="https://github.com/JohnZolton/freebay"
+        url="https://freebay.live"
+      description="description coming soon" />
     </ProjectPage>
   );
 }

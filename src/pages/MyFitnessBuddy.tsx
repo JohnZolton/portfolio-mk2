@@ -6,7 +6,13 @@ function MyFitnessBuddy() {
   return (
     <ProjectPage>
       <NavBar></NavBar>
-      <Project title="MyFitnessBuddy" description="description coming soon" />
+      <Project
+        title="MyFitnessBuddy"
+        repo="https://github.com/JohnZolton/fitness"
+        url="https://nutritiontracker.bio/tracking/"
+        paragraphs={[]}
+        description="description coming soon"
+      />
     </ProjectPage>
   );
 }

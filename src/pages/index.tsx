@@ -7,6 +7,11 @@ import CourseList from "./components/courselist";
 import TechList from "./components/techstack";
 import { useState } from "react";
 import Link from "next/link";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
+library.add(fab, faGithub);
 
 export default function Home() {
   return (
@@ -35,7 +40,7 @@ export default function Home() {
 function SmallProjects() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
-    <>
+    <div>
       <div className="my-3 text-center text-3xl font-semibold">Projects</div>
       <ProjectTile
         title="Scribe"
@@ -92,14 +97,14 @@ function SmallProjects() {
             className="transform transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-[-1px] group-hover:scale-125"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L11.586 11H3a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 011.414-1.414l4 4z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             />
           </svg>
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 
