@@ -1,5 +1,6 @@
 import React, { Children, PropsWithChildren, useEffect } from "react";
 import Link from "next/link";
+import YouTube from 'react-youtube'
 
 interface ProjectPageProps {
   title: string;
@@ -26,10 +27,17 @@ export function Project({
   url,
   paragraphs,
 }: ProjectPageProps) {
+    const options = {
+    playerVars: {
+      autoplay: 0,
+    },
+  };
   return (
     <>
-      {youtube && <div>{youtube}</div>}
       <div className="text-6xl font-semibold m-3">{title}</div>
+
+      {youtube && (
+      <div className="flex items-center"><YouTube videoId={youtube} opts={options} className="w-4/5 h-full"/></div>)}
       <div className="flex flex-row items-center gap-2">
 
       {url && (
@@ -47,8 +55,7 @@ export function Project({
       {repo && (
         <Link legacyBehavior href="">
           <a
-            href="JohnZolton_Resume.pdf"
-            rel="noopener noreferrer"
+            href={repo}            rel="noopener noreferrer"
             target="_blank"
             className=""
           >
@@ -68,7 +75,7 @@ export function Project({
         </Link>
       )}
       </div>
-      <div className="w-3/4">
+      <div className="w-1/2 pb-10">
         {paragraphs &&
           paragraphs.map((paragraph, index) => (
             <div key={index} className="my-2">{paragraph}</div>

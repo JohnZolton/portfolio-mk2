@@ -18,7 +18,7 @@ export const HeroSection = () => {
       <div className="pb-3 text-5xl font-semibold">John Zolton</div>
       <div className="text-2xl">Software Engineer</div>
       <div className="flex flex-row items-center gap-4 py-2  ">
-        <Link href="https://github.com/JohnZolton" legacyBehavior>
+        <Link href="https://github.com/JohnZolton" legacyBehavior className="">
           <a target="_blank" rel="noopener noreferrer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
