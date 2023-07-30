@@ -2,7 +2,8 @@ import StackDisplay from "./stackdisplay";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faCodeBranch } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
 
 
 interface ProtjectTileProps {
@@ -104,13 +105,17 @@ export function ProjectDisplay({
               <div className="transtion flex flex-row items-center duration-300 hover:text-orange-300">
                 <div className="px-1 font-semibold">{stars}</div>
                 <FontAwesomeIcon icon={faStar}/>
+                        <FontAwesomeIcon icon={['fab', 'github']} className="w-4 h-4  opacity-0"/>
               </div>
             )}
             {forks && (
+              <>
               <div className="flex flex-row items-center transition duration-300 hover:text-blue-500">
                 <div className="px-1 font-semibold">{forks}</div>
-                <FontAwesomeIcon icon={faCodeBranch}/>
+                <FontAwesomeIcon icon={faCodeBranch} />
+                        <FontAwesomeIcon icon={['fab', 'github']} className="w-4 h-4  opacity-0"/>
               </div>
+              </>
             )}
             {stack && (
               <div className="">
