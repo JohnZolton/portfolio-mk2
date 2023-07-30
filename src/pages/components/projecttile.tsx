@@ -109,13 +109,11 @@ export function ProjectDisplay({
               </div>
             )}
             {forks && (
-              <>
               <div className="flex flex-row items-center transition duration-300 hover:text-blue-500">
                 <div className="px-1 font-semibold">{forks}</div>
                 <FontAwesomeIcon icon={faCodeBranch} />
                         <FontAwesomeIcon icon={['fab', 'github']} className="w-4 h-4  opacity-0"/>
               </div>
-              </>
             )}
             {stack && (
               <div className="">
