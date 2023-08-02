@@ -19,6 +19,7 @@ function Lyfter() {
         ]}
         repo={"https://github.com/JohnZolton/lyfter"}
         url="https://lyfter.vercel.app/"
+        youtube="H96PbhReENc"
       />
     </ProjectPage>
   );
