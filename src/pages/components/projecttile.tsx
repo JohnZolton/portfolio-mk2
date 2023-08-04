@@ -1,11 +1,6 @@
 import StackDisplay from "./stackdisplay";
 import Image from "next/image";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { faCodeBranch } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-
 
 interface ProtjectTileProps {
   title: string;
@@ -62,7 +57,7 @@ export function ProjectDisplay({
         )}
         <div className="ml-3 w-full">
           <div className="text-xl font-semibold">
-            {page ? (
+            {(page || url || repo) ? (
               <div className="flex flex-row items-center">
                 <div className="group-hover:underline">{title}</div>
                 <svg
@@ -124,16 +119,38 @@ export default ProjectTile;
 
 interface ContentWrapperProps {
   page?: string;
+  url?: string;
+  repo?:string;
   children: React.ReactNode;
 }
 
-const ContentWrapper = ({ page, children }: ContentWrapperProps) => {
+const ContentWrapper = ({ page, repo, url, children }: ContentWrapperProps) => {
   if (page) {
     return (
-      <Link legacyBehavior href={page} className="">
+      <Link href={page} className="">
         <div className="group hover:cursor-pointer">{children}</div>
       </Link>
     );
+  }
+  if (!page){
+    if (url){
+    return(
+      <Link legacyBehavior href={url} className="">
+        <a target="_blank" rel="noopener noreferrer">
+        <div className="group hover:cursor-pointer">{children}</div>
+        </a>
+      </Link>
+    )}
+    if (repo){
+    return(
+      <Link legacyBehavior href={repo} className="">
+        <a target="_blank" rel="noopener noreferrer">
+        <div className="group hover:cursor-pointer">{children}</div>
+        </a>
+      </Link>
+    )
+
+    }
   }
 
   return <>{children}</>;
@@ -154,7 +171,7 @@ function ProjectTile({
   onMouseLeave,
 }: ProtjectTileProps) {
   return (
-    <ContentWrapper page={page}>
+    <ContentWrapper page={page} repo={repo} url={url}>
       <ProjectDisplay
         title={title}
         description={description}
