@@ -46,6 +46,7 @@ function SmallProjects() {
         title="Scribe"
         description="Real time voice-to-text transcription using the open source AI model Whisper"
         repo="https://github.com/JohnZolton/scribe"
+        page="https://github.com/JohnZolton/scribe"
         stars={39}
         forks={13}
         stack="Python, Whisper"
@@ -57,6 +58,7 @@ function SmallProjects() {
         title="AudioBooker"
         description="PDF and text file to audio converter using the open source AI model Bark"
         repo="https://github.com/JohnZolton/pdf-2-mp3"
+        page="https://github.com/JohnZolton/pdf-2-mp3"
         stack="Python, Bark"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("AudioBooker")}
@@ -67,6 +69,7 @@ function SmallProjects() {
         description="A modern take on a timeless classic"
         repo="https://github.com/JohnZolton/floppy-bird"
         url="https://floppybirddemo.github.io/"
+        page="https://floppybirddemo.github.io/"
         stack="JavaScript, HTML, CSS"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("Floppy Bird")}
