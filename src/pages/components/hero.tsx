@@ -1,5 +1,5 @@
-import React from "react";
-import { MdEmail } from "react-icons/md";
+import React, { useEffect, useState } from "react";
+import { MdEmail, MdInvertColors } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
@@ -14,9 +14,9 @@ export const HeroSection = () => {
   };
 
   return (
-    <div className="w-full max-w-lg p-10">
-      <div className="pb-3 text-5xl font-semibold">John Zolton</div>
-      <div className="text-2xl">Software Engineer</div>
+    <div className="w-full max-w-xl p-10">
+      <NameCard/>
+      <div className="text-3xl">Software Engineer</div>
       <div className="flex flex-row items-center gap-4 py-2  ">
         <Link href="https://github.com/JohnZolton" legacyBehavior className="">
           <a target="_blank" rel="noopener noreferrer">
@@ -56,3 +56,11 @@ export const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+function NameCard(){
+
+  return(
+      <div className="pb-3 text-6xl font-semibold">John Zolton</div>
+  )
+}

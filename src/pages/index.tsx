@@ -10,6 +10,7 @@ import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import Light from "./components/light";
 
 library.add(fab, faGithub);
 
@@ -22,6 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
+        <Light/>
         <div className="h-full md:w-1/2 lg:sticky  lg:top-0 lg:flex lg:flex-col lg:py-24">
           <HeroSection />
         </div>

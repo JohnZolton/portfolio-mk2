@@ -5,3 +5,5 @@
 body {
     @apply bg-gradient-to-tr from-cyan-950 to-gray-950 text-slate-200;
 }
+
+
