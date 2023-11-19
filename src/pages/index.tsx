@@ -48,8 +48,8 @@ function SmallProjects() {
         title="Scribe"
         description="Real time voice-to-text transcription using the open source AI model Whisper"
         repo="https://github.com/JohnZolton/scribe"
-        stars={39}
-        forks={13}
+        stars={45}
+        forks={12}
         stack="Python, Whisper"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("Scribe")}
@@ -57,7 +57,7 @@ function SmallProjects() {
       />
       <ProjectTile
         title="AudioBooker"
-        description="PDF and text file to audio converter using the open source AI model Bark"
+        description="Turn PDFs into Audio using the open source AI"
         repo="https://github.com/JohnZolton/pdf-2-mp3"
         stack="Python, Bark"
         hovered={hoveredProject}
