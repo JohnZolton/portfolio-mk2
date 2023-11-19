@@ -6,6 +6,17 @@ export function CourseList() {
       <div className="text-center text-3xl font-semibold">Education</div>
       <div className="m-1 max-w-xl  px-5 py-3">
         <CourseTile
+          title="University of Akron School of Law"
+          institution="Juris Doctor"
+          description="Specializing in Intellectual Property"
+        />
+        <CourseTile
+          title="University of Akron"
+          institution="Bachelor of Science"
+          description="Biomedical Engineering"
+        />
+      <div className="text-center my-2 text-2xl font-semibold">Computer Science Courses</div>
+        <CourseTile
           title="Algorithms Specialization"
           institution="Standford"
           description="Analysis of algorithms from Divide and Conquer, to Graph Search, to Greedy Algorithms and Dynamic Programming"

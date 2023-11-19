@@ -43,7 +43,7 @@ function SmallProjects() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
     <div>
-      <div className="my-3 text-center text-3xl font-semibold">Projects</div>
+      <div className="my-3 text-center text-3xl font-semibold">Software Projects</div>
       <ProjectTile
         title="Scribe"
         description="Real time voice-to-text transcription using the open source AI model Whisper"
@@ -57,7 +57,7 @@ function SmallProjects() {
       />
       <ProjectTile
         title="AudioBooker"
-        description="Turn PDFs into Audio using the open source AI"
+        description="Turn PDFs into Audio using open source AI"
         repo="https://github.com/JohnZolton/pdf-2-mp3"
         stack="Python, Bark"
         hovered={hoveredProject}
@@ -113,6 +113,7 @@ function BigProjectList() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
     <>
+      <div className="my-3 text-center text-3xl font-semibold">Web Projects</div>
       <ProjectTile
         title="Lyfter"
         description="Workout and exercise tracker with built in performance monitoring and program adjustment"
