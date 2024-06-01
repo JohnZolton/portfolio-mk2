@@ -10,7 +10,6 @@ import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Light from "./components/light";
 
 library.add(fab, faGithub);
 
@@ -23,7 +22,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <Light/>
         <div className="h-full md:w-1/2 lg:sticky  lg:top-0 lg:flex lg:flex-col lg:py-24">
           <HeroSection />
         </div>
@@ -43,13 +41,15 @@ function SmallProjects() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
     <div>
-      <div className="my-3 text-center text-3xl font-semibold">Software Projects</div>
+      <div className="my-3 text-center text-3xl font-semibold">
+        Software Projects
+      </div>
       <ProjectTile
         title="Scribe"
         description="Real time voice-to-text transcription using the open source AI model Whisper"
         repo="https://github.com/JohnZolton/scribe"
-        stars={45}
-        forks={12}
+        stars={50}
+        forks={15}
         stack="Python, Whisper"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("Scribe")}
@@ -113,22 +113,34 @@ function BigProjectList() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
     <>
-      <div className="my-3 text-center text-3xl font-semibold">Web Projects</div>
+      <div className="my-3 text-center text-3xl font-semibold">Web Apps</div>
       <ProjectTile
-        title="Lyfter"
-        description="Workout and exercise tracker with built in performance monitoring and program adjustment"
-        picture="lyfter2.png"
+        title="Patense.ai"
+        description="Save patent attorneys hours by analyzing documents in seconds."
+        picture="patense3.png"
+        page="patense"
+        url="https://patense.ai"
+        repo="https://github.com/JohnZolton/docktalk4"
+        stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk, AWS Lambda, OpenAI"
+        hovered={hoveredProject}
+        onMouseEnter={() => setHoveredProject("Patense.ai")}
+        onMouseLeave={() => setHoveredProject("")}
+      />
+      <ProjectTile
+        title="Liftr.club"
+        description="Workout and exercise tracker with built in performance monitoring and feedback adjustment"
+        picture="liftr.png"
         page="lyfter"
-        url="https://lyfter.vercel.app/"
+        url="https://liftr.club/"
         repo="https://github.com/JohnZolton/lyfter"
         stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk"
         hovered={hoveredProject}
-        onMouseEnter={() => setHoveredProject("Lyfter")}
+        onMouseEnter={() => setHoveredProject("Liftr.club")}
         onMouseLeave={() => setHoveredProject("")}
       />
       <ProjectTile
         title="MyFitnessBuddy"
-        description="Nutrition and activity tracker packed with quality of life features like automatic step tracking and meal planning"
+        description="Nutrition and activity tracker with quality of life features like automatic step tracking and repeat meal autofill"
         picture="fitnesspal2.png"
         page="MyFitnessBuddy"
         repo="https://github.com/JohnZolton/fitness"
@@ -140,7 +152,7 @@ function BigProjectList() {
       />
       <ProjectTile
         title="FreeBay"
-        description="Online Auction platform featuring commenting on listings, watchlisting items, 2FA, and email and password resets"
+        description="Online Auction platform featuring commenting on listings, watchlisting items, manual 2FA, and email and password resets"
         picture="freebay.png"
         page="FreeBay"
         repo="https://github.com/JohnZolton/freebay"

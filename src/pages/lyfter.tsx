@@ -7,7 +7,7 @@ function Lyfter() {
     <ProjectPage>
       <NavBar></NavBar>
       <Project
-        title="Lyfter"
+        title="Liftr"
         description="description coming soon"
         paragraphs={[
           "After finishing my last project I was eager to learn more modern tools. Then I learned about the 'T3 Stack' with an emphasis on type safety for both ease of development and safety at runtime. From hearing so much about Rust and its fabulous type safety, it piqued my interest, and i was sold. I started working on my latest project with the T3 stack (NextJs, React, Typescript, Tailwind and tRPC).",
@@ -18,8 +18,7 @@ function Lyfter() {
           "Ultimately I decided to have menu of the week's scheduled workouts and create a new one if the date of the most recent entry of the selected workout was over one week old. This way the user has the most flexibility and freedom. Miss a workout? No problem, you can make it up the next day. Need to do two workouts in one day? Go ahead.",
         ]}
         repo={"https://github.com/JohnZolton/lyfter"}
-        url="https://lyfter.vercel.app/"
-        youtube="H96PbhReENc"
+        url="https://liftr.club"
       />
     </ProjectPage>
   );
