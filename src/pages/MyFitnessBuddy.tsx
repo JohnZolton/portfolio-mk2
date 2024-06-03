@@ -65,7 +65,7 @@ function MyFitnessBuddy() {
           Although Garmin only provides API keys to companies, we leveraged an
           API wrapper, Python: Garmin Connect, to request data for user
           accounts. Users can manually sync their step data or enable automatic
-          syncing, which collects the previous day's step data.
+          syncing, which collects the previous day&apos;s step data.
         </p>
 
         <h2 className="mb-2 text-2xl font-semibold">
