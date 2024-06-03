@@ -42,15 +42,15 @@ function Patense() {
         <section className="mb-8">
           <h2 className="mb-2 text-3xl font-semibold">Patent 101</h2>
           <p className="mb-4">
-            If someone already published your thing, you can't patent it. If you
-            find a feature or combination of features that no one else has
-            published, you can patent it (if it's not obvious).
+            If someone already published your thing, you can&apos;t patent it.
+            If you find a feature or combination of features that no one else
+            has published, you can patent it (if it&apos;s not obvious).
           </p>
           <p className="mb-4">
             During the application process, patent examiners find relevant
             references. Patent lawyers then either convince the examiner the
-            references don't say the same thing or amend to differentiate from
-            the reference.
+            references don&apos;t say the same thing or amend to differentiate
+            from the reference.
           </p>
         </section>
 
@@ -71,7 +71,7 @@ function Patense() {
           <p className="mb-4">
             V1 executed a single walk through the specification. 1-2 page chunks
             were sent one at a time to GPT-3.5 along with a running list of
-            features. This was slow and didn't scale well to 100+ page
+            features. This was slow and didn&apos;t scale well to 100+ page
             specifications. Even after upgrading to premium Vercel hosting (5
             minute serverless functions) and transferring to AWS serverless (15
             minutes max runtime).
@@ -86,10 +86,10 @@ function Patense() {
             every inventive feature. Then recursively combine the lists of
             features two at a time with more GPT calls. The runtime was
             O(log(n)), meaning that if we doubled our input length from 100 to
-            200 pages, we're only adding one additional cycle of consolidation
-            (s/o merge sort for the inspiration). I still ran into OpenAI API
-            rate limits, but those can be managed with timeouts and money since
-            I was well within the runtime limitations on AWS.
+            200 pages, we&apos;re only adding one additional cycle of
+            consolidation (s/o merge sort for the inspiration). I still ran into
+            OpenAI API rate limits, but those can be managed with timeouts and
+            money since I was well within the runtime limitations on AWS.
           </p>
         </section>
 
@@ -104,32 +104,32 @@ function Patense() {
             closest vectors of text are likely the most relevant.
           </p>
           <p className="mb-4">
-            I used a 'parent document retriever' which is a little more
-            sophisticated. It splits the text into chunks, then splits those
-            chunks into even smaller chunks. The smaller chunks are queried for
-            the search but it returns the larger chunks, providing more context
-            to the model.
+            I used a &apos;parent document retriever&apos; which is a little
+            more sophisticated. It splits the text into chunks, then splits
+            those chunks into even smaller chunks. The smaller chunks are
+            queried for the search but it returns the larger chunks, providing
+            more context to the model.
           </p>
           <p className="mb-4">
             We get the most relevant chunks of references, pass them to GPT with
             each feature, and ask if the feature is disclosed by the text. Those
             responses are stored in a report so the user can easily tell which
-            features make for good amendments and which don't.
+            features make for good amendments and which don&apos;t.
           </p>
           <p className="mb-4">
-            Using a vector DB like this was fast but ultimately wasn't good
-            enough to get the relevant text for each feature. It's not
+            Using a vector DB like this was fast but ultimately wasn&apos;t good
+            enough to get the relevant text for each feature. It&apos;s not
             guaranteed that the vector query will get the proper text from large
             documents.{" "}
           </p>
         </section>
         <section className="mb-8">
           <h2 className="mb-2 text-3xl font-semibold">V3: $$$</h2>
-          <p className="mb-4">Vector DBs aren't viable, so what is?</p>
+          <p className="mb-4">Vector DBs aren&apos;t viable, so what is?</p>
           <p className="mb-4">
             What&apos;s more precise than a vector search? Sending the whole
             text in as context. But we can&apos;t do that for every feature,
-            that'd be insanely expensive, and wasteful.
+            that&apos;d be insanely expensive, and wasteful.
           </p>
           <p className="mb-4">
             But we don&apos;t need to search for EVERY feature, we just need to
@@ -176,11 +176,3 @@ function Patense() {
 }
 
 export default Patense;
-
-const paragraphs = [
-  "Patent attorneys spend hours and hours pouring over references and analyzing whether they disclose a certain feature or not.",
-  "LLMs can read and analyze text as fast as your wallet can handle.",
-  "By processing the references in parallel, with some clever prompting and distillation, I built a search tool to analyze references in seconds and save patent attorneys hours, up to thousands of dollars per office action.",
-  "Core features: (1) inventive feature extraction; (2) feature analysis.",
-  "Feature Extraction. ",
-];

@@ -4,9 +4,8 @@ export const AboutSection = () => {
   return (
     <div className="flex flex-col gap-4 pb-6 text-lg lg:py-8">
       <div className="">
-        During law school I discovered degenerate crypto arbitrage trading bots.
-        I fell in love with the power of programming and I&apos;ve been studying
-        computer science ever since.
+        During law school I discovered degenerate crypto trading bots. I fell in
+        love with the power of programming and I&apos;ve been coding ever since.
       </div>
       <div>Now I build tools to make life easier.</div>
       <div className="">

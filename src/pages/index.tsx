@@ -130,7 +130,7 @@ function BigProjectList() {
         title="Liftr.club"
         description="Workout and exercise tracker with built in performance monitoring and feedback adjustment"
         picture="liftr.png"
-        page="lyfter"
+        page="liftr"
         url="https://liftr.club/"
         repo="https://github.com/JohnZolton/lyfter"
         stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk"
@@ -148,18 +148,6 @@ function BigProjectList() {
         stack="Django, Postgres, Stripe, USDA API, Smartwatch API"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("MyFitnessBuddy")}
-        onMouseLeave={() => setHoveredProject("")}
-      />
-      <ProjectTile
-        title="FreeBay"
-        description="Online Auction platform featuring commenting on listings, watchlisting items, manual 2FA, and email and password resets"
-        picture="freebay.png"
-        page="FreeBay"
-        repo="https://github.com/JohnZolton/freebay"
-        url="https://freebay.live"
-        stack="Django, Postgres, AWS S3, Railway"
-        hovered={hoveredProject}
-        onMouseEnter={() => setHoveredProject("FreeBay")}
         onMouseLeave={() => setHoveredProject("")}
       />
     </>
