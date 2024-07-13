@@ -67,7 +67,7 @@ function Patense() {
         </section>
 
         <section className="mb-8">
-          <h2 className="mb-2 text-3xl font-semibold">V1 - Naive</h2>
+          <h2 className="mb-2 text-3xl font-semibold">V1: Naive</h2>
           <p className="mb-4">
             V1 executed a single walk through the specification. 1-2 page chunks
             were sent one at a time to GPT-3.5 along with a running list of
@@ -124,7 +124,7 @@ function Patense() {
           </p>
         </section>
         <section className="mb-8">
-          <h2 className="mb-2 text-3xl font-semibold">V3: $$$</h2>
+          <h2 className="mb-2 text-3xl font-semibold">V3 - $$$</h2>
           <p className="mb-4">Vector DBs aren&apos;t viable, so what is?</p>
           <p className="mb-4">
             What&apos;s more precise than a vector search? Sending the whole

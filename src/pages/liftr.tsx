@@ -35,20 +35,22 @@ function Liftr() {
           </Link>
         </div>
         <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">Welcome to Liftr</h2>
+          <h2 className="my-4 text-2xl font-semibold">Welcome to Liftr</h2>
           <p className="text-lg leading-relaxed">
-            Liftr is a workout tracking and coaching application designed to
-            keep you progressing. Inspired by the match-or-beat algorithm from
-            Renaissance Periodization, Liftr ensures your workout progression is
-            always on point.
+            Liftr is a full-fledged workout tracking and coaching application
+            that uses biofeedback to tailor weight, reps and sets programming
+            for bodybuilding. Inspired by the match-or-beat algorithm from
+            Renaissance Periodization and Menno Hensellmans&apos; deload
+            philosophy, Liftr ensures your workout progression is always on
+            point.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">Tech Stack</h2>
-          <p className="text-lg leading-relaxed">
-            Liftr is a T3 Stack project bootstrapped with create-t3-app,
-            utilizing the following technologies:
+          <p className="mb-2 text-lg leading-relaxed">
+            Liftr is a T3 Stack project built off create-t3-app, with the
+            following:
           </p>
           <ul className="list-disc space-y-2 pl-5">
             <li>
@@ -68,8 +70,8 @@ function Liftr() {
               seamless data handling.
             </li>
             <li>
-              <strong>Clerk:</strong> Providing secure and efficient user
-              authentication.
+              <strong>Nostr</strong> Custom log-in flow to utilize Nostr Pubkeys
+              identities for user authentication.
             </li>
             <li>
               <strong>Prisma:</strong> Our open-source database ORM for managing
@@ -86,11 +88,15 @@ function Liftr() {
           <h2 className="mb-4 text-2xl font-semibold">The Algorithm</h2>
           <p className="text-lg leading-relaxed">
             The core algorith is the match-or-beat system, it compares your
-            current workout performance to the previous week&apos;s. This system
-            drives continuous improvement by tracking performance based on
-            weight, reps, and sets. If performance improves, you keep pushing
-            forward. If performance declines, Liftr alerts you to take a
-            necessary deload, keeping you on track without overtraining.
+            current workout performance to the previous week&apos;s. Tracking
+            performance based on weight, reps, and sets. If performance
+            improves, you keep pushing forward. If performance declines, Liftr
+            alerts you to take a deload for that muscle group. This is a key
+            difference from the Renaissance Periodization app, they schedule
+            week or half-week deloads. But what if only your biceps are
+            overreached? It&apos;d be a waste of time to deload every muscle if
+            only one is toasted. Thats why we do muscle specific deloads
+            triggered by a decrease in performance.
           </p>
         </section>
 
@@ -121,7 +127,29 @@ function Liftr() {
               <strong>Add & Remove:</strong> Effortlessly add and remove sets,
               exercises, and workouts to fit your routine.
             </li>
+            <li>
+              <strong>Sign in with Nostr:</strong> Built a custom auth solution
+              using Nostr signed-messages to verify log in and JWTs for api
+              auth.
+            </li>
+            <li>
+              <strong>Cardio:</strong> I caved and added cardio to my
+              bodybuilding app. I had to run IRL and realized how out of shape I
+              was so now we do cardio.
+            </li>
           </ul>
+        </section>
+        <section className="mb-8">
+          <h2 className="mb-4 text-2xl font-semibold">State Management</h2>
+          <p className="text-lg leading-relaxed">
+            Initially this was built purely with useState. I was young and naive
+            and just trudged through the prop-drilling. I didn&apos;t learn
+            about other state management solutions until I fell for the rust
+            frontend-backend meme. After learning how miserable front-end rust
+            is (at least I learned about Yewdux) I came back to the original TS
+            implementation and refactored it with Zustand. Now I can add
+            features without wanting to end it all.
+          </p>
         </section>
       </div>
     </ProjectPage>

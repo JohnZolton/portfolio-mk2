@@ -84,10 +84,12 @@ function SmallProjects() {
       />
       <div className="my-3 text-center text-xl font-semibold">
         <Link
-          href="projectarchive"
+          href="https://github.com/JohnZolton"
+          rel="noopener noreferrer"
+          target="_blank"
           className="group flex flex-row items-center justify-center gap-1 text-gray-300 hover:text-white hover:underline"
         >
-          Full Project Archive
+          More on Github
           <svg
             aria-hidden="true"
             fill="currentColor"

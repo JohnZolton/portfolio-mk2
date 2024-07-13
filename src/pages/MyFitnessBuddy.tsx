@@ -37,9 +37,10 @@ function MyFitnessBuddy() {
         </h1>
         <h2 className="mb-2 text-2xl font-semibold">Key Features</h2>
         <ul className="mb-4 list-inside list-disc">
-          <li>Automatic syncing with smartwatch health data</li>
+          <li>Automatic syncing with smartwatch data</li>
           <li>Querying nutrition data from the USDA food database</li>
           <li>Customizable nutrition goals</li>
+          <li>Auto-repeating meals</li>
         </ul>
 
         <h2 className="mb-2 text-2xl font-semibold">Smart Search Bar</h2>
