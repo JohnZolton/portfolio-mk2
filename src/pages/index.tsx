@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import PageLayout from "./components/pagelayout";
 import HeroSection from "./components/hero";
 import AboutSection from "./components/about";
@@ -10,6 +11,8 @@ import Link from "next/link";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { useEffect, useRef, useCallback } from "react";
+import { useMediaQuery } from "react-responsive";
 
 library.add(fab, faGithub);
 
@@ -22,18 +25,252 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <div className="h-full md:w-1/2 lg:sticky  lg:top-0 lg:flex lg:flex-col lg:py-24">
+        <div className="my-auto h-full flex-col items-center justify-center md:w-1/2 lg:sticky lg:flex lg:flex-col lg:py-80">
           <HeroSection />
         </div>
-        <div className="h-full  w-full overflow-auto md:w-3/4 lg:pt-24">
-          <AboutSection />
-          <BigProjectList />
-          <TechList />
-          <SmallProjects />
-          <CourseList />
+        <div className="h-full  w-full ">
+          <ProjectShowcase projects={projects} />
         </div>
       </PageLayout>
     </>
+  );
+}
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+interface ProjectShowcaseProps {
+  projects: Project[];
+}
+const projects = [
+  {
+    id: 1,
+    title: "Patense.ai",
+    description: "Patent Law AI Tools",
+    imageUrl: "patense3.png",
+  },
+  {
+    id: 2,
+    title: "AI Lead Generator",
+    description: "Rust AI Web Scraper",
+    imageUrl: "rust-scraper.png",
+  },
+  {
+    id: 3,
+    title: "Snorkle",
+    description: "Local, private AI Document Deep Search",
+    imageUrl: "snorkle.png",
+  },
+  {
+    id: 4,
+    title: "Liftr.club",
+    description: "Workout Coach App",
+    imageUrl: "liftr.png",
+  },
+  {
+    id: 5,
+    title: "My fitness buddy",
+    description: "Nutrition and activity tracking",
+    imageUrl: "fitnesspal.png",
+  },
+];
+
+const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
+  const [rotation, setRotation] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const rotationSpeed = 0.1;
+  const animationRef = useRef<number>();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const animate = useCallback(() => {
+    setRotation((prev) => (prev + rotationSpeed) % 360);
+    animationRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  useEffect(() => {
+    if (!isDragging && !isHovering) {
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animationRef.current!);
+    }
+    return () => cancelAnimationFrame(animationRef.current!);
+  }, [isDragging, isHovering, animate]);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.clientX);
+  }, []);
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      setRotation((prev) => (prev + deltaX * 0.5) % 360);
+      setStartX(e.clientX);
+    },
+    [isDragging, startX]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    setIsDragging(false);
+    setIsHovering(false);
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  function handleCardClick(project: Project) {
+    setSelectedProject(project);
+  }
+  function handleCloseDetail() {
+    setSelectedProject(null);
+  }
+
+  useEffect(() => {
+    // Add global event listeners for mouseup and mouseleave
+    const handleGlobalMouseUp = () => setIsDragging(false);
+    const handleGlobalMouseLeave = () => setIsDragging(false);
+
+    window.addEventListener("mouseup", handleGlobalMouseUp);
+    window.addEventListener("mouseleave", handleGlobalMouseLeave);
+
+    return () => {
+      window.removeEventListener("mouseup", handleGlobalMouseUp);
+      window.removeEventListener("mouseleave", handleGlobalMouseLeave);
+    };
+  }, []);
+
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+  if (!isMobile)
+    return (
+      <div
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        className="relative h-[200px] w-full cursor-grab select-none lg:mt-64"
+      >
+        {projects.map((project, index) => {
+          const angle =
+            (index / projects.length) * 2 * Math.PI +
+            rotation * (Math.PI / 180);
+          const radius = 250; // Adjust this value to change the circle size
+          const x = Math.sin(angle) * radius;
+          const y = Math.cos(angle) * radius * 0.3 - 50; // Flatten the circle and raise the back
+          const scale = 0.8 + (0.3 * Math.cos(angle)) / 2; // Scale based on position
+          const zIndex = Math.round(Math.cos(angle) * 100);
+
+          return (
+            <div
+              key={project.id}
+              className="absolute z-10 h-96 w-80 rounded-lg border border-black bg-white p-4 shadow-xl transition-all duration-300 ease-out"
+              onClick={() => handleCardClick(project)}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseEnter={() => {
+                setIsHovering(true);
+              }}
+              onMouseLeave={() => {
+                setIsHovering(false);
+              }}
+              style={{
+                transform: `translate(${x}px, ${y}px) scale(${scale})`,
+                zIndex,
+                left: "calc(50% - 128px)", // Center horizontally
+                top: "50%", // Center vertically
+              }}
+            >
+              <img
+                src={project.imageUrl}
+                draggable={false}
+                alt={project.title}
+                className="h-64 w-full rounded-t-lg object-cover"
+              />
+              <div className="p-4 text-black">
+                <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
+                <p className="text-gray-600">{project.description}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col space-y-4 p-4">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className="rounded-lg border border-black bg-white p-4 shadow-md"
+            onClick={() => handleCardClick(project)}
+          >
+            <img
+              src={project.imageUrl}
+              alt={project.title}
+              className="h-48 w-full rounded-t-lg object-cover"
+            />
+            <div className="p-4 text-black">
+              <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
+              <p className="text-gray-600">{project.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (selectedProject) {
+    return (
+      <div className="relative h-full w-full">
+        <DetailView
+          project={selectedProject}
+          handleCloseDetail={handleCloseDetail}
+        />
+      </div>
+    );
+  }
+};
+
+import { motion } from "framer-motion";
+
+interface DetailViewProps {
+  project: Project;
+  handleCloseDetail: () => void;
+}
+function DetailView({ project, handleCloseDetail }: DetailViewProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      className="full absolute z-[9999] flex h-screen w-full flex-col items-start  justify-start bg-black p-8 text-white"
+    >
+      <div className="w-full">
+        <img
+          src={project.imageUrl}
+          className="h-auto max-h-[40vh] w-full object-contain"
+          alt={project.title}
+        />
+      </div>
+      <div className="mt-4">
+        <h2 className="text-2xl font-bold">{project.title}</h2>
+        <p className="mt-2">{project.description}</p>
+      </div>
+      <button
+        className="absolute right-2 top-2 text-gray-500 hover:text-gray-900"
+        onClick={handleCloseDetail}
+      >
+        &times;
+      </button>
+    </motion.div>
   );
 }
 

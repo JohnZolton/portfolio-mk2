@@ -32,7 +32,6 @@ export const HeroSection = () => {
   return (
     <div className="w-full max-w-xl p-10">
       <NameCard />
-      <div className="text-3xl">Lawyer/Engineer</div>
       <div className="flex flex-row items-center gap-4 py-2  ">
         <TooltipProvider>
           <Tooltip delayDuration={300}>
