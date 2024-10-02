@@ -133,6 +133,8 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   }
   function handleCloseDetail() {
     setSelectedProject(null);
+    setIsDragging(false);
+    setHoveredIndex(null);
   }
 
   useEffect(() => {
