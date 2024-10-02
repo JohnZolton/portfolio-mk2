@@ -83,10 +83,11 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
   const rotationSpeed = 0.1;
   const animationRef = useRef<number>();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [dragged, setDragged] = useState(false);
 
   const animate = useCallback(() => {
     setRotation((prev) => (prev + rotationSpeed) % 360);
@@ -94,16 +95,16 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   }, []);
 
   useEffect(() => {
-    if (!isDragging && !isHovering) {
+    if (!isDragging && !hoveredIndex) {
       animationRef.current = requestAnimationFrame(animate);
     } else {
       cancelAnimationFrame(animationRef.current!);
     }
     return () => cancelAnimationFrame(animationRef.current!);
-  }, [isDragging, isHovering, animate]);
+  }, [isDragging, hoveredIndex, animate]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    setIsDragging(true);
+    setIsDragging(false);
     setStartX(e.clientX);
   }, []);
 
@@ -113,21 +114,22 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
       const deltaX = e.clientX - startX;
       setRotation((prev) => (prev + deltaX * 0.5) % 360);
       setStartX(e.clientX);
+      if (Math.abs(deltaX) > 5) {
+        setDragged(true);
+      }
     },
-    [isDragging, startX]
+    [isDragging, startX, dragged, setDragged]
   );
 
-  const handleMouseLeave = useCallback(() => {
-    setIsDragging(false);
-    setIsHovering(false);
-  }, []);
-
   const handleMouseUp = useCallback(() => {
+    setDragged(false);
     setIsDragging(false);
   }, []);
 
   function handleCardClick(project: Project) {
-    setSelectedProject(project);
+    if (!dragged) {
+      setSelectedProject(project);
+    }
   }
   function handleCloseDetail() {
     setSelectedProject(null);
@@ -151,57 +153,73 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
 
   if (!isMobile)
     return (
-      <div
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        className="relative h-[200px] w-full cursor-grab select-none lg:mt-64"
-      >
-        {projects.map((project, index) => {
-          const angle =
-            (index / projects.length) * 2 * Math.PI +
-            rotation * (Math.PI / 180);
-          const radius = 250; // Adjust this value to change the circle size
-          const x = Math.sin(angle) * radius;
-          const y = Math.cos(angle) * radius * 0.3 - 50; // Flatten the circle and raise the back
-          const scale = 0.8 + (0.3 * Math.cos(angle)) / 2; // Scale based on position
-          const zIndex = Math.round(Math.cos(angle) * 100);
+      <>
+        {!selectedProject && (
+          <div
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            className="relative h-[200px] w-full cursor-grab select-none lg:mt-64"
+          >
+            {projects.map((project, index) => {
+              const angle =
+                (index / projects.length) * 2 * Math.PI +
+                rotation * (Math.PI / 180);
+              const radius = 250; // Adjust this value to change the circle size
+              const x = Math.sin(angle) * radius;
+              const y = Math.cos(angle) * radius * 0.3 - 50; // Flatten the circle and raise the back
+              const scale = 0.8 + (0.3 * Math.cos(angle)) / 2; // Scale based on position
+              const zIndex = Math.round(Math.cos(angle) * 100);
+              const isHovered =
+                hoveredIndex !== null && hoveredIndex + 1 === index + 1;
 
-          return (
-            <div
-              key={project.id}
-              className="absolute z-10 h-96 w-80 rounded-lg border border-black bg-white p-4 shadow-xl transition-all duration-300 ease-out"
-              onClick={() => handleCardClick(project)}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseEnter={() => {
-                setIsHovering(true);
-              }}
-              onMouseLeave={() => {
-                setIsHovering(false);
-              }}
-              style={{
-                transform: `translate(${x}px, ${y}px) scale(${scale})`,
-                zIndex,
-                left: "calc(50% - 128px)", // Center horizontally
-                top: "50%", // Center vertically
-              }}
-            >
-              <img
-                src={project.imageUrl}
-                draggable={false}
-                alt={project.title}
-                className="h-64 w-full rounded-t-lg object-cover"
-              />
-              <div className="p-4 text-black">
-                <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
-                <p className="text-gray-600">{project.description}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+              return (
+                <div
+                  key={project.id}
+                  className="absolute  z-10 h-96 w-80 rounded-lg border border-black bg-white p-4 shadow-xl transition-all duration-300 ease-out"
+                  onClick={() => handleCardClick(project)}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseEnter={() => {
+                    setHoveredIndex(index);
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredIndex(null);
+                  }}
+                  style={{
+                    transform: `translate(${x}px, ${y}px) scale(${
+                      isHovered ? 1.2 * scale : scale
+                    })`,
+                    zIndex,
+                    left: "calc(50% - 128px)", // Center horizontally
+                    top: "50%", // Center vertically
+                  }}
+                >
+                  <img
+                    src={project.imageUrl}
+                    draggable={false}
+                    alt={project.title}
+                    className="h-64 w-full rounded-t-lg object-cover"
+                  />
+                  <div className="p-4 text-black">
+                    <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
+                    <p className="text-gray-600">{project.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {selectedProject && (
+          <div className="relative h-full w-full">
+            <DetailView
+              project={selectedProject}
+              handleCloseDetail={handleCloseDetail}
+            />
+          </div>
+        )}
+      </>
     );
 
   if (isMobile) {
@@ -224,16 +242,14 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
             </div>
           </div>
         ))}
-      </div>
-    );
-  }
-  if (selectedProject) {
-    return (
-      <div className="relative h-full w-full">
-        <DetailView
-          project={selectedProject}
-          handleCloseDetail={handleCloseDetail}
-        />
+        {selectedProject && (
+          <div className="relative h-full w-full">
+            <DetailView
+              project={selectedProject}
+              handleCloseDetail={handleCloseDetail}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -246,31 +262,77 @@ interface DetailViewProps {
   handleCloseDetail: () => void;
 }
 function DetailView({ project, handleCloseDetail }: DetailViewProps) {
+  useEffect(() => {
+    function handleEscKey(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        handleCloseDetail();
+      }
+    }
+
+    function handlePopState(event: PopStateEvent) {
+      if (event.state && event.state.detailView) {
+        // Close the detail view when back button is pressed and detail view is open
+        handleCloseDetail();
+      }
+    }
+
+    document.addEventListener("keydown", handleEscKey);
+    window.addEventListener("popstate", handlePopState);
+    // Push a new state to the history when opening the detail view
+    window.history.pushState({ detailView: true }, "");
+
+    // Remove event listeners on cleanup
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [handleCloseDetail]);
+
+  // Function to handle closing the detail view
+  const closeDetailView = () => {
+    // Check if there's a state in the history with detailView: true
+    if (window.history.state && window.history.state.detailView) {
+      // If so, go back in the browser history
+      window.history.back();
+    } else {
+      // If not, just call the close function directly
+      handleCloseDetail();
+    }
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      className="full absolute z-[9999] flex h-screen w-full flex-col items-start  justify-start bg-black p-8 text-white"
-    >
-      <div className="w-full">
-        <img
-          src={project.imageUrl}
-          className="h-auto max-h-[40vh] w-full object-contain"
-          alt={project.title}
-        />
-      </div>
-      <div className="mt-4">
-        <h2 className="text-2xl font-bold">{project.title}</h2>
-        <p className="mt-2">{project.description}</p>
-      </div>
-      <button
-        className="absolute right-2 top-2 text-gray-500 hover:text-gray-900"
+    <>
+      <div
+        className="fixed inset-0 z-[9998] bg-black bg-opacity-50"
         onClick={handleCloseDetail}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        onClick={(e) => e.stopPropagation()}
+        className="full absolute z-[9999] flex h-screen w-full flex-col items-start  justify-start bg-black p-8 text-white"
       >
-        &times;
-      </button>
-    </motion.div>
+        <div className="w-full">
+          <img
+            src={project.imageUrl}
+            className="h-auto max-h-[40vh] w-full object-contain"
+            alt={project.title}
+          />
+        </div>
+        <div className="mt-4">
+          <h2 className="text-2xl font-bold">{project.title}</h2>
+          <p className="mt-2">{project.description}</p>
+        </div>
+        <button
+          className="absolute right-2 top-2 text-gray-500 hover:text-gray-900"
+          onClick={handleCloseDetail}
+        >
+          &times;
+        </button>
+      </motion.div>
+    </>
   );
 }
 
