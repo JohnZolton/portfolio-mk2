@@ -104,7 +104,8 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   }, [isDragging, hoveredIndex, animate]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    setIsDragging(false);
+    setDragged(false);
+    setIsDragging(true);
     setStartX(e.clientX);
   }, []);
 
@@ -118,11 +119,10 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
         setDragged(true);
       }
     },
-    [isDragging, startX, dragged, setDragged]
+    [isDragging, startX]
   );
 
   const handleMouseUp = useCallback(() => {
-    setDragged(false);
     setIsDragging(false);
   }, []);
 
