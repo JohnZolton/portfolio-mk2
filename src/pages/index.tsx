@@ -1,4 +1,5 @@
 import Head from "next/head";
+import StackDisplay from "./components/stackdisplay";
 
 import PageLayout from "./components/pagelayout";
 import HeroSection from "./components/hero";
@@ -13,6 +14,12 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useRef, useCallback } from "react";
 import { useMediaQuery } from "react-responsive";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "@radix-ui/react-tooltip";
 
 library.add(fab, faGithub);
 
@@ -41,12 +48,16 @@ interface Project {
   title: string;
   description: string;
   imageUrl: string;
+  stack?: string;
+  repo?: string;
+  stars?: number;
+  forks?: number;
 }
 
 interface ProjectShowcaseProps {
   projects: Project[];
 }
-const projects = [
+const projects: Project[] = [
   {
     id: 1,
     title: "Patense.ai",
@@ -64,6 +75,9 @@ const projects = [
     title: "Snorkle",
     description: "Local, private AI Document Deep Search",
     imageUrl: "snorkle.png",
+    repo: "https://github.com/JohnZolton/snorkle",
+    stars: 24,
+    forks: 4,
   },
   {
     id: 4,
@@ -135,6 +149,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
     setSelectedProject(null);
     setIsDragging(false);
     setHoveredIndex(null);
+    setDragged(false);
   }
 
   useEffect(() => {
@@ -161,7 +176,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            className="relative h-[200px] w-full cursor-grab select-none lg:mt-64"
+            className="relative h-[200px] w-full  select-none lg:mt-64"
           >
             {projects.map((project, index) => {
               const angle =
@@ -176,9 +191,10 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
                 hoveredIndex !== null && hoveredIndex + 1 === index + 1;
 
               return (
-                <div
+                <motion.div
                   key={project.id}
-                  className="absolute  z-10 h-96 w-80 rounded-lg border border-black bg-white p-4 shadow-xl transition-all duration-300 ease-out"
+                  layoutId={`project-${project.id}`}
+                  className="absolute  z-10 h-96 w-80 overflow-hidden rounded-lg border border-black bg-white p-4 shadow-xl transition-all duration-300 ease-out"
                   onClick={() => handleCardClick(project)}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
@@ -197,29 +213,53 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
                     left: "calc(50% - 128px)", // Center horizontally
                     top: "50%", // Center vertically
                   }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
-                  <img
-                    src={project.imageUrl}
-                    draggable={false}
-                    alt={project.title}
-                    className="h-64 w-full rounded-t-lg object-cover"
-                  />
-                  <div className="p-4 text-black">
-                    <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
-                    <p className="text-gray-600">{project.description}</p>
-                  </div>
-                </div>
+                  <motion.div
+                    layoutId={`project-image-container-${project.id}`}
+                    className="h-64 w-full overflow-hidden"
+                  >
+                    <motion.img
+                      layoutId={`project-image-${project.id}`}
+                      src={project.imageUrl}
+                      draggable={false}
+                      alt={project.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    layoutId={`project-content-${project.id}`}
+                    className="p-4 text-black"
+                  >
+                    <motion.h3
+                      layoutId={`project-title-${project.id}`}
+                      className=" text-xl font-bold"
+                    >
+                      {project.title}
+                    </motion.h3>
+                    <motion.p
+                      layoutId={`project-description-${project.id}`}
+                      className="text-gray-600"
+                    >
+                      {project.description}
+                    </motion.p>
+                    <GithubDisplay project={project} />
+                  </motion.div>
+                </motion.div>
               );
             })}
           </div>
         )}
         {selectedProject && (
-          <div className="relative h-full w-full">
-            <DetailView
-              project={selectedProject}
-              handleCloseDetail={handleCloseDetail}
-            />
-          </div>
+          <AnimatePresence>
+            <div className="relative h-full w-full">
+              <DetailView
+                key="detail-view"
+                project={selectedProject}
+                handleCloseDetail={handleCloseDetail}
+              />
+            </div>
+          </AnimatePresence>
         )}
       </>
     );
@@ -236,7 +276,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
             <img
               src={project.imageUrl}
               alt={project.title}
-              className="h-48 w-full rounded-t-lg object-cover"
+              className="h-48 w-full rounded-t-lg object-contain"
             />
             <div className="p-4 text-black">
               <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
@@ -257,7 +297,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   }
 };
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface DetailViewProps {
   project: Project;
@@ -271,8 +311,12 @@ function DetailView({ project, handleCloseDetail }: DetailViewProps) {
       }
     }
 
+    interface CustomState {
+      detailView?: boolean;
+    }
     function handlePopState(event: PopStateEvent) {
-      if (event.state && event.state.detailView) {
+      const state = event.state as CustomState | null;
+      if (state && state.detailView) {
         // Close the detail view when back button is pressed and detail view is open
         handleCloseDetail();
       }
@@ -290,43 +334,44 @@ function DetailView({ project, handleCloseDetail }: DetailViewProps) {
     };
   }, [handleCloseDetail]);
 
-  // Function to handle closing the detail view
-  const closeDetailView = () => {
-    // Check if there's a state in the history with detailView: true
-    if (window.history.state && window.history.state.detailView) {
-      // If so, go back in the browser history
-      window.history.back();
-    } else {
-      // If not, just call the close function directly
-      handleCloseDetail();
-    }
-  };
-
   return (
     <>
-      <div
-        className="fixed inset-0 z-[9998] bg-black bg-opacity-50"
-        onClick={handleCloseDetail}
-      />
+      <div className="fixed inset-0 z-[9998]" onClick={handleCloseDetail} />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
-        className="full absolute z-[9999] flex h-screen w-full flex-col items-start  justify-start bg-black p-8 text-white"
+        layoutId={`project-${project.id}`}
+        className="full absolute z-[9999] flex h-screen w-full flex-col items-start  justify-start bg-white p-8 text-black"
       >
-        <div className="w-full">
-          <img
+        <motion.div
+          layoutId={`project-image-container-${project.id}`}
+          className="h-[40vh] w-full"
+        >
+          <motion.img
+            layoutId={`project-image-${project.id}`}
             src={project.imageUrl}
-            className="h-auto max-h-[40vh] w-full object-contain"
+            className="h-full w-full object-cover"
             alt={project.title}
           />
-        </div>
-        <div className="mt-4">
-          <h2 className="text-2xl font-bold">{project.title}</h2>
-          <p className="mt-2">{project.description}</p>
-        </div>
+        </motion.div>
+        <motion.div layoutId={`project-content-${project.id}`} className="mt-4">
+          <motion.h2
+            layoutId={`project-title-${project.id}`}
+            className="text-4xl font-bold"
+          >
+            {project.title}
+          </motion.h2>
+          <motion.p layoutId={`project-description-${project.id}`} className="">
+            {project.description}
+          </motion.p>
+          <div className="my-2">
+            <GithubDisplay project={project} />
+          </div>
+        </motion.div>
         <button
           className="absolute right-2 top-2 text-gray-500 hover:text-gray-900"
           onClick={handleCloseDetail}
@@ -335,6 +380,78 @@ function DetailView({ project, handleCloseDetail }: DetailViewProps) {
         </button>
       </motion.div>
     </>
+  );
+}
+
+interface GithubDisplayProps {
+  project: Project;
+}
+function GithubDisplay({ project }: GithubDisplayProps) {
+  return (
+    <div className="flex flex-row">
+      {project.repo && (
+        <Link href={project.repo} legacyBehavior className="">
+          <a target="_blank" rel="noopener noreferrer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="black"
+            >
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+        </Link>
+      )}
+      {project.stars && (
+        <div className="transtion flex flex-row items-center duration-300 hover:text-orange-300">
+          <div className="px-1 font-semibold">{project.stars}</div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-star"
+          >
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+        </div>
+      )}
+      {project.forks && (
+        <div className="flex flex-row items-center transition duration-300 hover:text-blue-500">
+          <div className="px-1 font-semibold">{project.forks}</div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-git-fork"
+          >
+            <circle cx="12" cy="18" r="3" />
+            <circle cx="6" cy="6" r="3" />
+            <circle cx="18" cy="6" r="3" />
+            <path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9" />
+            <path d="M12 12v3" />
+          </svg>
+        </div>
+      )}
+      {project.stack && (
+        <div className="">
+          <StackDisplay stack={project.stack} />
+        </div>
+      )}
+    </div>
   );
 }
 
