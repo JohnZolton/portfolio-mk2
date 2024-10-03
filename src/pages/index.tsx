@@ -229,7 +229,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
                   </motion.div>
                   <motion.div
                     layoutId={`project-content-${project.id}`}
-                    className="p-4 text-black"
+                    className="p-2 text-black"
                   >
                     <motion.h3
                       layoutId={`project-title-${project.id}`}
