@@ -1,7 +1,7 @@
 import Head from "next/head";
 import StackDisplay from "./components/stackdisplay";
 
-import PageLayout from "./components/pagelayout";
+import { ScrollArea } from "../components/ui/scroll-area";
 import HeroSection from "./components/hero";
 import AboutSection from "./components/about";
 import ProjectTile from "./components/projecttile";
@@ -20,6 +20,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@radix-ui/react-tooltip";
+import { Scroll } from "lucide-react";
 
 library.add(fab, faGithub);
 
@@ -31,14 +32,19 @@ export default function Home() {
         <meta name="description" content="Portfolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageLayout>
-        <div className="my-auto h-full flex-col items-center justify-center md:w-1/2 lg:sticky lg:flex lg:flex-col lg:py-80">
+      <div className="relative flex h-screen w-full flex-col lg:flex-row">
+        <div className="flex h-screen w-1/2 flex-col items-end justify-center lg:sticky lg:top-0">
           <HeroSection />
         </div>
-        <div className="h-full  w-full ">
-          <ProjectShowcase projects={projects} />
+        <div className="flex w-full items-center justify-center lg:w-1/2">
+          <div className="flex h-full w-full flex-col justify-center overflow-y-auto p-4">
+            <div className="flex w-2/3 flex-col items-center justify-center lg:items-end lg:justify-end lg:pt-[800px]">
+              <BigProjectList />
+              <SmallProjects />
+            </div>
+          </div>
         </div>
-      </PageLayout>
+      </div>
     </>
   );
 }
@@ -52,335 +58,6 @@ interface Project {
   repo?: string;
   stars?: number;
   forks?: number;
-}
-
-interface ProjectShowcaseProps {
-  projects: Project[];
-}
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Patense.ai",
-    description: "Patent Law AI Tools",
-    imageUrl: "patense3.png",
-  },
-  {
-    id: 2,
-    title: "AI Lead Generator",
-    description: "Rust AI Web Scraper",
-    imageUrl: "rust-scraper.png",
-  },
-  {
-    id: 3,
-    title: "Snorkle",
-    description: "Local, private AI Document Deep Search",
-    imageUrl: "snorkle.png",
-    repo: "https://github.com/JohnZolton/snorkle",
-    stars: 24,
-    forks: 4,
-  },
-  {
-    id: 4,
-    title: "Liftr.club",
-    description: "Workout Coach App",
-    imageUrl: "liftr.png",
-  },
-  {
-    id: 5,
-    title: "My fitness buddy",
-    description: "Nutrition and activity tracking",
-    imageUrl: "fitnesspal.png",
-  },
-];
-
-const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
-  const [rotation, setRotation] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const rotationSpeed = 0.1;
-  const animationRef = useRef<number>();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [dragged, setDragged] = useState(false);
-
-  const animate = useCallback(() => {
-    setRotation((prev) => (prev + rotationSpeed) % 360);
-    animationRef.current = requestAnimationFrame(animate);
-  }, []);
-
-  useEffect(() => {
-    if (!isDragging && !hoveredIndex) {
-      animationRef.current = requestAnimationFrame(animate);
-    } else {
-      cancelAnimationFrame(animationRef.current!);
-    }
-    return () => cancelAnimationFrame(animationRef.current!);
-  }, [isDragging, hoveredIndex, animate]);
-
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    setDragged(false);
-    setIsDragging(true);
-    setStartX(e.clientX);
-  }, []);
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging) return;
-      const deltaX = e.clientX - startX;
-      setRotation((prev) => (prev + deltaX * 0.5) % 360);
-      setStartX(e.clientX);
-      if (Math.abs(deltaX) > 5) {
-        setDragged(true);
-      }
-    },
-    [isDragging, startX]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  function handleCardClick(project: Project) {
-    if (!dragged) {
-      setSelectedProject(project);
-    }
-  }
-  function handleCloseDetail() {
-    setSelectedProject(null);
-    setIsDragging(false);
-    setHoveredIndex(null);
-    setDragged(false);
-  }
-
-  useEffect(() => {
-    // Add global event listeners for mouseup and mouseleave
-    const handleGlobalMouseUp = () => setIsDragging(false);
-    const handleGlobalMouseLeave = () => setIsDragging(false);
-
-    window.addEventListener("mouseup", handleGlobalMouseUp);
-    window.addEventListener("mouseleave", handleGlobalMouseLeave);
-
-    return () => {
-      window.removeEventListener("mouseup", handleGlobalMouseUp);
-      window.removeEventListener("mouseleave", handleGlobalMouseLeave);
-    };
-  }, []);
-
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-
-  if (!isMobile)
-    return (
-      <>
-        {!selectedProject && (
-          <div
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            className="relative h-[200px] w-full  select-none lg:mt-64"
-          >
-            {projects.map((project, index) => {
-              const angle =
-                (index / projects.length) * 2 * Math.PI +
-                rotation * (Math.PI / 180);
-              const radius = 250; // Adjust this value to change the circle size
-              const x = Math.sin(angle) * radius;
-              const y = Math.cos(angle) * radius * 0.3 - 50; // Flatten the circle and raise the back
-              const scale = 0.8 + (0.3 * Math.cos(angle)) / 2; // Scale based on position
-              const zIndex = Math.round(Math.cos(angle) * 100);
-              const isHovered =
-                hoveredIndex !== null && hoveredIndex + 1 === index + 1;
-
-              return (
-                <motion.div
-                  key={project.id}
-                  layoutId={`project-${project.id}`}
-                  className="absolute  z-10 h-96 w-80 overflow-hidden rounded-lg border border-black bg-white p-4 shadow-xl transition-all duration-300 ease-out"
-                  onClick={() => handleCardClick(project)}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseEnter={() => {
-                    setHoveredIndex(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredIndex(null);
-                  }}
-                  style={{
-                    transform: `translate(${x}px, ${y}px) scale(${
-                      isHovered ? 1.2 * scale : scale
-                    })`,
-                    zIndex,
-                    left: "calc(50% - 128px)", // Center horizontally
-                    top: "50%", // Center vertically
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                >
-                  <motion.div
-                    layoutId={`project-image-container-${project.id}`}
-                    className="h-64 w-full overflow-hidden"
-                  >
-                    <motion.img
-                      layoutId={`project-image-${project.id}`}
-                      src={project.imageUrl}
-                      draggable={false}
-                      alt={project.title}
-                      className="h-full w-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    layoutId={`project-content-${project.id}`}
-                    className="p-2 text-black"
-                  >
-                    <motion.h3
-                      layoutId={`project-title-${project.id}`}
-                      className=" text-xl font-bold"
-                    >
-                      {project.title}
-                    </motion.h3>
-                    <motion.p
-                      layoutId={`project-description-${project.id}`}
-                      className="text-gray-600"
-                    >
-                      {project.description}
-                    </motion.p>
-                    <GithubDisplay project={project} />
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </div>
-        )}
-        {selectedProject && (
-          <AnimatePresence>
-            <div className="relative h-full w-full">
-              <DetailView
-                key="detail-view"
-                project={selectedProject}
-                handleCloseDetail={handleCloseDetail}
-              />
-            </div>
-          </AnimatePresence>
-        )}
-      </>
-    );
-
-  if (isMobile) {
-    return (
-      <div className="flex flex-col space-y-4 p-4">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="rounded-lg border border-black bg-white p-4 shadow-md"
-            onClick={() => handleCardClick(project)}
-          >
-            <img
-              src={project.imageUrl}
-              alt={project.title}
-              className="h-48 w-full rounded-t-lg object-contain"
-            />
-            <div className="p-4 text-black">
-              <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
-              <p className="text-gray-600">{project.description}</p>
-            </div>
-          </div>
-        ))}
-        {selectedProject && (
-          <div className="relative h-full w-full">
-            <DetailView
-              project={selectedProject}
-              handleCloseDetail={handleCloseDetail}
-            />
-          </div>
-        )}
-      </div>
-    );
-  }
-};
-
-import { AnimatePresence, motion } from "framer-motion";
-
-interface DetailViewProps {
-  project: Project;
-  handleCloseDetail: () => void;
-}
-function DetailView({ project, handleCloseDetail }: DetailViewProps) {
-  useEffect(() => {
-    function handleEscKey(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        handleCloseDetail();
-      }
-    }
-
-    interface CustomState {
-      detailView?: boolean;
-    }
-    function handlePopState(event: PopStateEvent) {
-      const state = event.state as CustomState | null;
-      if (state && state.detailView) {
-        // Close the detail view when back button is pressed and detail view is open
-        handleCloseDetail();
-      }
-    }
-
-    document.addEventListener("keydown", handleEscKey);
-    window.addEventListener("popstate", handlePopState);
-    // Push a new state to the history when opening the detail view
-    window.history.pushState({ detailView: true }, "");
-
-    // Remove event listeners on cleanup
-    return () => {
-      document.removeEventListener("keydown", handleEscKey);
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, [handleCloseDetail]);
-
-  return (
-    <>
-      <div className="fixed inset-0 z-[9998]" onClick={handleCloseDetail} />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        onClick={(e) => e.stopPropagation()}
-        layoutId={`project-${project.id}`}
-        className="full absolute z-[9999] flex h-screen w-full flex-col items-start  justify-start bg-white p-8 text-black"
-      >
-        <motion.div
-          layoutId={`project-image-container-${project.id}`}
-          className="h-[40vh] w-full"
-        >
-          <motion.img
-            layoutId={`project-image-${project.id}`}
-            src={project.imageUrl}
-            className="h-full w-full object-cover"
-            alt={project.title}
-          />
-        </motion.div>
-        <motion.div layoutId={`project-content-${project.id}`} className="mt-4">
-          <motion.h2
-            layoutId={`project-title-${project.id}`}
-            className="text-4xl font-bold"
-          >
-            {project.title}
-          </motion.h2>
-          <motion.p layoutId={`project-description-${project.id}`} className="">
-            {project.description}
-          </motion.p>
-          <div className="my-2">
-            <GithubDisplay project={project} />
-          </div>
-        </motion.div>
-        <button
-          className="absolute right-2 top-2 text-gray-500 hover:text-gray-900"
-          onClick={handleCloseDetail}
-        >
-          &times;
-        </button>
-      </motion.div>
-    </>
-  );
 }
 
 interface GithubDisplayProps {
@@ -459,9 +136,17 @@ function SmallProjects() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
     <div>
-      <div className="my-3 text-center text-3xl font-semibold">
-        Software Projects
-      </div>
+      <div className="my-2 text-center text-xl font-semibold">Small stuff</div>
+      <ProjectTile
+        title="Tabby-API-Ollama"
+        description="TabbyAPI with extra endpoints to be a drop-in replacement for Ollama"
+        repo="https://github.com/JohnZolton/tabbyAPI-ollama"
+        stars={1}
+        stack="Python, ExLlama2"
+        hovered={hoveredProject}
+        onMouseEnter={() => setHoveredProject("Tappy-API-Ollama")}
+        onMouseLeave={() => setHoveredProject("")}
+      />
       <ProjectTile
         title="Scribe"
         description="Real time voice-to-text transcription using the open source AI model Whisper"
@@ -505,7 +190,7 @@ function SmallProjects() {
           href="https://github.com/JohnZolton"
           rel="noopener noreferrer"
           target="_blank"
-          className="group flex flex-row items-center justify-center gap-1 text-gray-300 hover:text-white hover:underline"
+          className="group flex flex-row items-center justify-center gap-1 hover:underline"
         >
           More on Github
           <svg
@@ -532,28 +217,52 @@ function SmallProjects() {
 function BigProjectList() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
-    <>
-      <div className="my-3 text-center text-3xl font-semibold">Web Apps</div>
+    <div className="">
       <ProjectTile
         title="Patense.ai"
-        description="Save patent attorneys hours by analyzing documents in seconds."
+        description="Suite of patent tools from AI document analysis to streamlining paperwork"
         picture="patense3.png"
         page="patense"
         url="https://patense.ai"
         repo="https://github.com/JohnZolton/docktalk4"
-        stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk, AWS Lambda, OpenAI"
+        stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, AWS Lambda, OpenAI"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("Patense.ai")}
         onMouseLeave={() => setHoveredProject("")}
       />
       <ProjectTile
+        title="Patense.local"
+        description="Patense.ai fork with 100% local LLMs"
+        picture=""
+        page="patense-local"
+        repo="https://github.com/JohnZolton/patense-local"
+        stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma"
+        stars={7}
+        hovered={hoveredProject}
+        onMouseEnter={() => setHoveredProject("Patense.local")}
+        onMouseLeave={() => setHoveredProject("")}
+      />
+      <ProjectTile
+        title="Snorkle"
+        description="Deep document search with 100% local LLMs (generic fork of patense.local)"
+        picture=""
+        page="snorkle"
+        repo="https://github.com/JohnZolton/snorkle"
+        stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma"
+        stars={24}
+        forks={4}
+        hovered={hoveredProject}
+        onMouseEnter={() => setHoveredProject("Snorkle")}
+        onMouseLeave={() => setHoveredProject("")}
+      />
+      <ProjectTile
         title="Liftr.club"
-        description="Workout and exercise tracker with built in performance monitoring and feedback adjustment"
+        description="Bodybuilding training app with built-in performance adjusment/progressive overload with biofeedback. Custom auth with Nostr log-in."
         picture="liftr.png"
         page="liftr"
         url="https://liftr.club/"
         repo="https://github.com/JohnZolton/lyfter"
-        stack="Next.js, TypeScript, React, tRPC, Prisma, Tailwind, Clerk"
+        stack="Nostr, Next.js, TypeScript, React"
         hovered={hoveredProject}
         onMouseEnter={() => setHoveredProject("Liftr.club")}
         onMouseLeave={() => setHoveredProject("")}
@@ -570,6 +279,6 @@ function BigProjectList() {
         onMouseEnter={() => setHoveredProject("MyFitnessBuddy")}
         onMouseLeave={() => setHoveredProject("")}
       />
-    </>
+    </div>
   );
 }

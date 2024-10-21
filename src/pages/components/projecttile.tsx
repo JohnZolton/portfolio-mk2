@@ -35,8 +35,8 @@ export function ProjectDisplay({
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`my-1 w-full rounded-2xl border border-transparent bg-cyan-950  px-3 py-1 transition duration-300 ${
-        hovered ? (hovered === title ? "border-white" : "opacity-50") : ""
+      className={`my-1 w-full rounded-2xl border border-black  px-3 py-1 transition duration-300 ${
+        hovered ? (hovered === title ? "border-black" : "opacity-50") : ""
       }`}
     >
       <div className="flex flex-col items-center sm:flex-row">
