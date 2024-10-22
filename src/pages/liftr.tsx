@@ -5,6 +5,7 @@ import { Project } from "./components/projectpage";
 import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
+import StackDisplay from "./components/stackdisplay";
 
 function Liftr() {
   return (
@@ -34,6 +35,10 @@ function Liftr() {
             View Code <Github />
           </Link>
         </div>
+        <p className="my-6 flex flex-row">
+          Tech Stack:{" "}
+          <StackDisplay stack="Nostr, Next.js, TypeScript, React, tRPC, Prisma" />
+        </p>
         <section className="mb-8">
           <h2 className="my-4 text-2xl font-semibold">Welcome to Liftr</h2>
           <p className="text-lg leading-relaxed">
@@ -44,44 +49,6 @@ function Liftr() {
             philosophy, Liftr ensures your workout progression is always on
             point.
           </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold">Tech Stack</h2>
-          <p className="mb-2 text-lg leading-relaxed">
-            Liftr is a T3 Stack project built off create-t3-app, with the
-            following:
-          </p>
-          <ul className="list-disc space-y-2 pl-5">
-            <li>
-              <strong>Next.js:</strong> The robust React framework for
-              server-rendered applications.
-            </li>
-            <li>
-              <strong>React:</strong> For building dynamic and responsive user
-              interfaces.
-            </li>
-            <li>
-              <strong>TypeScript:</strong> Ensuring type safety and scalability
-              in our codebase.
-            </li>
-            <li>
-              <strong>tRPC:</strong> An end-to-end typesafe API layer for
-              seamless data handling.
-            </li>
-            <li>
-              <strong>Nostr</strong> Custom log-in flow to utilize Nostr Pubkeys
-              identities for user authentication.
-            </li>
-            <li>
-              <strong>Prisma:</strong> Our open-source database ORM for managing
-              complex data structures.
-            </li>
-            <li>
-              <strong>Tailwind:</strong> A utility-first CSS framework for
-              crafting beautiful interfaces.
-            </li>
-          </ul>
         </section>
 
         <section className="mb-8">

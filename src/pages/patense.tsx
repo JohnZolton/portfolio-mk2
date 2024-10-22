@@ -5,36 +5,44 @@ import { Project } from "./components/projectpage";
 import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
+import StackDisplay from "./components/stackdisplay";
 
 function Patense() {
   return (
     <ProjectPage>
       <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl p-8">
-        <h1 className="mb-6 text-center text-6xl font-bold">Patense.ai</h1>
+      <div className="container mx-auto max-w-3xl p-2">
+        <h1 className="mb-8 text-center text-6xl font-bold">Patense.ai</h1>
         <div className="mb-4 flex items-center justify-center">
           <video width="100%" height="auto" controls muted>
             <source src={"/patensedemo4.mp4"} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="mx-auto my-2 flex max-w-xs flex-row justify-between px-10">
+        <div className="mx-auto my-2 flex max-w-xs flex-row justify-between gap-x-4 px-10">
           <Link
             href={"https://patense.ai"}
             target="_blank"
-            className={buttonVariants({ variant: "secondary" })}
+            className={buttonVariants({ variant: "default" })}
           >
             See it live!
           </Link>
           <Link
             href={"https://github.com/JohnZolton/patense.ai"}
             target="_blank"
-            className={buttonVariants({ variant: "secondary" })}
+            className={buttonVariants({ variant: "default" })}
           >
-            View Code <Github />
+            <div className="flex flex-row items-center gap-x-2">
+              <div>View Code</div>
+              <Github />
+            </div>
           </Link>
         </div>
-        <p className="mb-6 text-lg">
+        <p className="my-6 flex flex-row">
+          Tech Stack:{" "}
+          <StackDisplay stack="Next.js, TypeScript, React, tRPC, Stripe, AWS Lambda, OpenAI" />
+        </p>
+        <p className="my-6 text-lg">
           Patense.ai is a patent prosecution tool to help lawyers analyze office
           actions.
         </p>
@@ -67,7 +75,7 @@ function Patense() {
         </section>
 
         <section className="mb-8">
-          <h2 className="mb-2 text-3xl font-semibold">V1: Naive</h2>
+          <h2 className="mb-2 text-3xl font-semibold">V1 - Naive</h2>
           <p className="mb-4">
             V1 executed a single walk through the specification. 1-2 page chunks
             were sent one at a time to GPT-3.5 along with a running list of
@@ -119,8 +127,8 @@ function Patense() {
           <p className="mb-4">
             Using a vector DB like this was fast but ultimately wasn&apos;t good
             enough to get the relevant text for each feature. It&apos;s not
-            guaranteed that the vector query will get the proper text from large
-            documents.{" "}
+            guaranteed that the vector query will get the same text from a
+            documents that the examiner relied on.{" "}
           </p>
         </section>
         <section className="mb-8">

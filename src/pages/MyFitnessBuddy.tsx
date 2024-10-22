@@ -5,6 +5,7 @@ import { Project } from "./components/projectpage";
 import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
+import StackDisplay from "./components/stackdisplay";
 
 function MyFitnessBuddy() {
   return (
@@ -27,15 +28,24 @@ function MyFitnessBuddy() {
           <Link
             href={"https://github.com/JohnZolton/fitness-production"}
             target="_blank"
-            className={buttonVariants({ variant: "secondary" })}
+            className={buttonVariants({ variant: "default" })}
           >
-            View Code <Github />
+            <div className="mr-2">View Code</div>
+            <Github />
           </Link>
         </div>
-        <h1 className="mb-4 text-center text-4xl font-bold">
+        <p className="my-6 flex flex-row">
+          Tech Stack:{" "}
+          <StackDisplay stack="Django, Postgres, Stripe, USDA API, Garmin API Wrapper" />
+        </p>
+        <h1 className="mb-4 text-4xl font-bold">
           All-in-One Health Monitoring Website
         </h1>
-        <h2 className="mb-2 text-2xl font-semibold">Key Features</h2>
+        <div>
+          This was my first &apos;real&apos; web app and it&apos;s kind of
+          cringe but it&apos;s staying up here for posterity.
+        </div>
+        <h2 className="my-4 text-2xl font-semibold">Key Features</h2>
         <ul className="mb-4 list-inside list-disc">
           <li>Automatic syncing with smartwatch data</li>
           <li>Querying nutrition data from the USDA food database</li>
