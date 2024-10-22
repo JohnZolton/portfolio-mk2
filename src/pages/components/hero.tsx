@@ -99,5 +99,9 @@ export const HeroSection = () => {
 export default HeroSection;
 
 function NameCard() {
-  return <div className="pb-3 text-6xl font-semibold">John Zolton</div>;
+  return (
+    <div className="pb-3 font-pixellated text-8xl font-semibold">
+      John Zolton
+    </div>
+  );
 }
