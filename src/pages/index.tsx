@@ -74,7 +74,7 @@ function ProjectList() {
       <ProjectTile
         title="Patense.local"
         description="Patense.ai fork with 100% local LLMs"
-        picture=""
+        picture="patense-local.png"
         page="patense-local"
         repo="https://github.com/JohnZolton/patense-local"
         stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma"
@@ -86,7 +86,7 @@ function ProjectList() {
       <ProjectTile
         title="Snorkle"
         description="Deep document search with 100% local LLMs (generic fork of patense.local)"
-        picture=""
+        picture="snorkle.png"
         page="snorkle"
         repo="https://github.com/JohnZolton/snorkle"
         stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma"
