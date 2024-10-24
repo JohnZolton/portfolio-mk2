@@ -11,7 +11,7 @@ function MyFitnessBuddy() {
   return (
     <ProjectPage>
       <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl p-8">
+      <div className="container mx-auto max-w-3xl p-8 text-xl">
         <h1 className="mb-6 text-center text-6xl font-bold">
           My Fitness Buddy
         </h1>
