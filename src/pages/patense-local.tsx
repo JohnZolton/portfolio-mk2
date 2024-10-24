@@ -118,8 +118,9 @@ function Patense() {
             than openAI (at my current price tier).
           </p>
           <p className="text-lg leading-relaxed">
-            I think the entire process of obtaining a patent can be automated.
-            I&apos;m building out tools for the various macro actions needed.
+            I think the entire process of obtaining a patent can be automated
+            (or at least, seriously augmented) with LLMs. I&apos;m building out
+            tools for the various macro actions needed.
           </p>
         </section>
       </div>

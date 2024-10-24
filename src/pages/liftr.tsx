@@ -11,7 +11,7 @@ function Liftr() {
   return (
     <ProjectPage>
       <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl p-8">
+      <div className="container mx-auto max-w-3xl p-8 text-xl">
         <h1 className="mb-6 text-center text-6xl font-bold">Liftr</h1>
         <div className="mb-4 flex items-center justify-center">
           <video width="100%" height="auto" controls muted>
@@ -19,20 +19,20 @@ function Liftr() {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="mx-auto my-2 flex max-w-xs flex-row justify-between px-10">
+        <div className="mx-auto my-2 flex max-w-xs flex-row gap-x-8 px-10">
           <Link
             href={"https://liftr.club"}
             target="_blank"
-            className={buttonVariants({ variant: "secondary" })}
+            className={buttonVariants({ variant: "default" })}
           >
             See it live!
           </Link>
           <Link
             href={"https://github.com/JohnZolton/lyfter"}
             target="_blank"
-            className={buttonVariants({ variant: "secondary" })}
+            className={buttonVariants({ variant: "default" })}
           >
-            View Code <Github />
+            View Code <Github className="ml-2" />
           </Link>
         </div>
         <p className="my-6 flex flex-row">
@@ -42,27 +42,26 @@ function Liftr() {
         <section className="mb-8">
           <h2 className="my-4 text-2xl font-semibold">Welcome to Liftr</h2>
           <p className="text-lg leading-relaxed">
-            Liftr is a full-fledged workout tracking and coaching application
-            that uses biofeedback to tailor weight, reps and sets programming
-            for bodybuilding. Inspired by the match-or-beat algorithm from
-            Renaissance Periodization and Menno Hensellmans&apos; deload
-            philosophy, Liftr ensures your workout progression is always on
-            point.
+            Liftr is a workout tracking and coaching application that uses
+            biofeedback to tailor workout planning (weight, reps and sets
+            progression) for bodybuilding. Inspired by the match-or-beat
+            algorithm from Renaissance Periodization and Menno Hensellmans&apos;
+            deload philosophy.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">The Algorithm</h2>
           <p className="text-lg leading-relaxed">
-            The core algorith is the match-or-beat system, it compares your
-            current workout performance to the previous week&apos;s. Tracking
-            performance based on weight, reps, and sets. If performance
+            Workouts are planned based on the match-or-beat system. It compares
+            your current workout performance to the previous week&apos;s.
+            Tracking performance based on weight, reps, and sets. If performance
             improves, you keep pushing forward. If performance declines, Liftr
             alerts you to take a deload for that muscle group. This is a key
             difference from the Renaissance Periodization app, they schedule
             week or half-week deloads. But what if only your biceps are
             overreached? It&apos;d be a waste of time to deload every muscle if
-            only one is toasted. Thats why we do muscle specific deloads
+            only one is toasted. Thats why I chose to do muscle specific deloads
             triggered by a decrease in performance.
           </p>
         </section>
@@ -102,7 +101,7 @@ function Liftr() {
             <li>
               <strong>Cardio:</strong> I caved and added cardio to my
               bodybuilding app. I had to run IRL and realized how out of shape I
-              was so now we do cardio.
+              was so now I do cardio.
             </li>
           </ul>
         </section>

@@ -30,7 +30,7 @@ export const HeroSection = () => {
   }
 
   return (
-    <div className="w-full max-w-xl p-10">
+    <div className="flex w-full max-w-xl flex-col p-10">
       <NameCard />
       <div className="flex flex-row items-center gap-4 py-2  ">
         <TooltipProvider>
@@ -100,7 +100,7 @@ export default HeroSection;
 
 function NameCard() {
   return (
-    <div className="pb-3 font-pixellated text-8xl font-semibold">
+    <div className=" pb-3 font-pixellated text-8xl font-semibold">
       John Zolton
     </div>
   );
