@@ -14,10 +14,13 @@ function Patense() {
       <div className="container mx-auto max-w-3xl p-2">
         <h1 className="mb-8 text-center text-6xl font-bold">Patense.local</h1>
         <div className="mb-4 flex items-center justify-center">
-          <video width="100%" height="auto" controls muted>
-            <source src={"/extract.mp4"} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="relative w-full overflow-hidden bg-black pb-[56.25%]">
+            <iframe
+              className="absolute left-0 top-0 h-full w-full"
+              src="https://www.youtube.com/embed/k-4vgzUKX7w"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+          </div>
         </div>
         <div className="mx-auto my-2 flex max-w-xs flex-row items-center justify-center  px-10">
           <Link
@@ -29,10 +32,10 @@ function Patense() {
             <Github />
           </Link>
         </div>
-        <p className="my-6 flex flex-row">
+        <div className="my-6 flex flex-row">
           Tech Stack:{" "}
           <StackDisplay stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma" />
-        </p>
+        </div>
         <section className="mb-8">
           <h2 className="my-4 text-2xl font-semibold">Patense.local</h2>
           <p className="text-lg leading-relaxed">

@@ -14,10 +14,15 @@ function Patense() {
       <div className="container mx-auto max-w-3xl p-2">
         <h1 className="mb-8 text-center text-6xl font-bold">Patense.ai</h1>
         <div className="mb-4 flex items-center justify-center">
-          <video width="100%" height="auto" controls muted>
-            <source src={"/patensedemo4.mp4"} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="relative w-full overflow-hidden bg-black pb-[56.25%]">
+            <iframe
+              className="absolute left-0 top-0 h-full w-full"
+              src="https://www.youtube.com/embed/cKi-O7qVutI"
+              //frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              //allowfullscreen
+            ></iframe>
+          </div>
         </div>
         <div className="mx-auto my-2 flex max-w-xs flex-row justify-between gap-x-4 px-10">
           <Link
@@ -38,10 +43,10 @@ function Patense() {
             </div>
           </Link>
         </div>
-        <p className="my-6 flex flex-row">
+        <div className="my-6 flex flex-row">
           Tech Stack:{" "}
           <StackDisplay stack="Next.js, TypeScript, React, tRPC, Stripe, AWS Lambda, OpenAI" />
-        </p>
+        </div>
         <p className="my-6 text-lg">
           Patense.ai is a patent prosecution tool to help lawyers analyze office
           actions.
