@@ -99,7 +99,7 @@ function ProjectList() {
       <ProjectTile
         title="Liftr.club"
         description="Bodybuilding training app with built-in performance adjusment/progressive overload with biofeedback. Custom auth with Nostr public/private keys."
-        picture="liftr.png"
+        picture="liftr-thumbnail.png"
         page="liftr"
         url="https://liftr.club/"
         repo="https://github.com/JohnZolton/lyfter"

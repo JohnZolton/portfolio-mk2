@@ -32,10 +32,10 @@ function Patense() {
             <Github />
           </Link>
         </div>
-        <p className="my-6 flex flex-row">
+        <div className="my-6 flex flex-row">
           Tech Stack:{" "}
           <StackDisplay stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma" />
-        </p>
+        </div>
         <section className="mb-8 ">
           <div className="flex flex-row gap-x-2">
             <h2 className="my-4 text-2xl font-semibold">Snorkle</h2>
