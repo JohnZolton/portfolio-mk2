@@ -34,10 +34,10 @@ function MyFitnessBuddy() {
             <Github />
           </Link>
         </div>
-        <p className="my-6 flex flex-row">
+        <div className="my-6 flex flex-row">
           Tech Stack:{" "}
           <StackDisplay stack="Django, Postgres, Stripe, USDA API, Garmin API Wrapper" />
-        </p>
+        </div>
         <h1 className="mb-4 text-4xl font-bold">
           All-in-One Health Monitoring Website
         </h1>

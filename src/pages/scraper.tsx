@@ -25,9 +25,9 @@ function Patense() {
             <Github />
           </Link>
         </div>
-        <p className="my-6 flex flex-row">
+        <div className="my-6 flex flex-row">
           Tech Stack: <StackDisplay stack="Rust, Mistralrs" />
-        </p>
+        </div>
         <section className="mb-8">
           <h2 className="my-4 text-2xl font-semibold">
             Web-scraper/lead-generator

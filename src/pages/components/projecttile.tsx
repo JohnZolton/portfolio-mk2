@@ -42,7 +42,7 @@ export function ProjectDisplay({
       <div className="flex flex-col items-center sm:flex-row">
         {picture && (
           <div
-            className={`h-28 w-44    ${
+            className={`h-28 w-44 bg-black  ${
               hovered === title ? "  brightness-125   " : ""
             }`}
           >
