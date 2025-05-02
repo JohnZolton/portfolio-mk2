@@ -13,7 +13,7 @@ interface ProjectPageProps {
 
 export default function ProjectPage(props: PropsWithChildren) {
   return (
-    <main className="max-w-screen mx-auto flex min-h-screen flex-col items-center">
+    <main className="max-w-screen mx-auto flex min-h-screen flex-col items-center bg-gray-50">
       {props.children}
     </main>
   );

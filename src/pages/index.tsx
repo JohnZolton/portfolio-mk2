@@ -2,8 +2,10 @@ import Head from "next/head";
 import StackDisplay from "./components/stackdisplay";
 import { PawPrint } from "lucide-react";
 import { ScrollArea } from "../components/ui/scroll-area";
+import { ScrollHint } from "../components/ui/scroll-hint";
 import HeroSection from "./components/hero";
 import AboutSection from "./components/about";
+import ExperienceSection from "./components/experience";
 import ProjectTile from "./components/projecttile";
 import CourseList from "./components/courselist";
 import TechList from "./components/techstack";
@@ -32,22 +34,42 @@ export default function Home() {
         <meta name="description" content="Portfolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col lg:flex-row">
-        <div className="w-full lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:w-1/2">
-          <div className="relative flex h-full flex-col items-center justify-center md:items-center lg:items-end">
-            <HeroSection />
-            <div className="absolute bottom-14 right-4 lg:bottom-4 lg:left-4">
-              <Link href={"/murph"}>
-                <PawPrint />
-              </Link>
+      <div className="mx-auto flex min-h-screen max-w-[1600px] items-center px-4 py-16">
+        {/* Three-column layout */}
+        <div className="grid w-full grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-12">
+          {/* Column 1: Hero Section */}
+          <div className="lg:col-span-3 lg:border-r lg:border-gray-100 lg:pr-8">
+            <div className="flex h-full flex-col justify-center">
+              <HeroSection />
+              <div className="mt-8 flex justify-center">
+                <Link
+                  href={"/murph"}
+                  className="flex items-center gap-2 text-gray-500 hover:text-gray-700"
+                >
+                  <PawPrint size={18} />
+                  <span>Meet Murph</span>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="sm:w-2/3 md:mx-auto md:flex md:flex-col md:items-center md:justify-center lg:ml-[50%] lg:w-2/3">
-          <div className="flex h-full w-full flex-col justify-center p-4">
-            <div className="flex w-full flex-col items-center justify-center lg:w-2/3 lg:items-end lg:justify-end lg:pt-[300px]">
-              <ProjectList />
-            </div>
+
+          {/* Column 2: About & Experience */}
+          <div className="lg:col-span-4 lg:pl-4">
+            <ScrollHint height="h-[calc(100vh-10rem)]">
+              <div className="space-y-12 pb-16">
+                <AboutSection />
+                <ExperienceSection />
+              </div>
+            </ScrollHint>
+          </div>
+
+          {/* Column 3: Projects */}
+          <div className="lg:col-span-5">
+            <ScrollHint height="h-[calc(100vh-10rem)]">
+              <div className="pb-16">
+                <ProjectList />
+              </div>
+            </ScrollHint>
           </div>
         </div>
       </div>
@@ -59,6 +81,17 @@ function ProjectList() {
   const [hoveredProject, setHoveredProject] = useState("");
   return (
     <div className="">
+      <ProjectTile
+        title="SocraticSensei.xyz"
+        description="AI Powered Custom Study SaaS"
+        picture="socraticsensei.png"
+        page="socraticsensei"
+        url="https://socraticsensei.xyz"
+        stack="Next.js, TypeScript, React, tRPC, Stripe, AWS Lambda, Google Gemini"
+        hovered={hoveredProject}
+        onMouseEnter={() => setHoveredProject("SocraticSensei.xyz")}
+        onMouseLeave={() => setHoveredProject("")}
+      />
       <ProjectTile
         title="Patense.ai"
         description="Suite of patent tools from AI document analysis to streamlining paperwork"
@@ -121,9 +154,7 @@ function ProjectList() {
         onMouseLeave={() => setHoveredProject("")}
       />
       <div>
-        <div className="my-2 text-center text-xl font-semibold">
-          Small stuff
-        </div>
+        <h2 className="mb-6 text-2xl font-bold text-gray-900">Small stuff</h2>
         <ProjectTile
           title="Tabby-API-Ollama"
           description="TabbyAPI fork with extra endpoints to be a drop-in replacement for Ollama"
@@ -183,30 +214,32 @@ function ProjectList() {
           onMouseEnter={() => setHoveredProject("This Website")}
           onMouseLeave={() => setHoveredProject("")}
         />
-        <div className="my-3 text-center text-xl font-semibold">
-          <Link
-            href="https://github.com/JohnZolton"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="group flex flex-row items-center justify-center gap-1 hover:underline"
-          >
-            More on Github
-            <svg
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              width="1em"
-              className="transform transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-[-1px] group-hover:scale-125"
+        <div className="mb-6 mt-8">
+          <h2 className="text-2xl font-bold text-gray-900">
+            <Link
+              href="https://github.com/JohnZolton"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="group flex flex-row items-center gap-2 hover:text-blue-600"
             >
-              <path
-                fillRule="evenodd"
-                d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L11.586 11H3a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 011.414-1.414l4 4z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </Link>
+              More on Github
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                height="1.25em"
+                width="1.25em"
+                className="transform transition-all duration-200 group-hover:translate-x-1 group-hover:translate-y-[-1px]"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L11.586 11H3a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 011.414-1.414l4 4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          </h2>
         </div>
       </div>
     </div>
