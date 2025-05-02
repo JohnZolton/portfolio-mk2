@@ -35,8 +35,12 @@ export function ProjectDisplay({
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`my-1 w-full rounded-2xl border border-black  px-3 py-1 transition duration-300 ${
-        hovered ? (hovered === title ? "border-black" : "opacity-50") : ""
+      className={`my-4 w-full rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md ${
+        hovered
+          ? hovered === title
+            ? "border-blue-200 shadow-md"
+            : "opacity-70"
+          : ""
       }`}
     >
       <div className="flex flex-col items-center sm:flex-row">
@@ -56,7 +60,7 @@ export function ProjectDisplay({
           </div>
         )}
         <div className="ml-3 w-full">
-          <div className="text-xl font-semibold">
+          <div className="text-xl font-bold text-gray-900">
             {page || url || repo ? (
               <div className="flex flex-row items-center">
                 <div className="group-hover:underline">{title}</div>
@@ -83,9 +87,9 @@ export function ProjectDisplay({
             )}
           </div>
           <div>
-            <div>{description}</div>
+            <div className="text-sm text-gray-600">{description}</div>
           </div>
-          <div className="mt-1 flex flex-row items-center">
+          <div className="mt-3 flex flex-row items-center">
             {(stars || forks) && (
               <div>
                 <svg

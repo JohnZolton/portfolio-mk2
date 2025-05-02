@@ -30,9 +30,11 @@ export const HeroSection = () => {
   }
 
   return (
-    <div className="flex w-full max-w-xl flex-col p-10">
-      <NameCard />
-      <div className="flex flex-row items-center gap-4 py-2  ">
+    <div className="flex w-full flex-col">
+      <div className="pb-3 text-center font-pixellated text-6xl font-semibold lg:text-8xl">
+        John Zolton
+      </div>
+      <div className="flex flex-row items-center justify-center gap-4 py-2">
         <TooltipProvider>
           <Tooltip delayDuration={300}>
             <TooltipTrigger>
@@ -97,11 +99,3 @@ export const HeroSection = () => {
 };
 
 export default HeroSection;
-
-function NameCard() {
-  return (
-    <div className=" pb-3 font-pixellated text-8xl font-semibold">
-      John Zolton
-    </div>
-  );
-}
