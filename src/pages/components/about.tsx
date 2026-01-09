@@ -10,7 +10,10 @@ export const AboutSection = () => {
             Patent attorney turned software engineer with a passion for building
             innovative AI-powered tools.
           </p>
-          <p>I will automate something tedious no matter how long it takes.</p>
+          <p>
+            I heard AI was going to take my job so I&apos;m doing my part to
+            speed it up.
+          </p>
           <p>
             When I&apos;m not at the computer or staring into the abyss,
             I&apos;m usually hiking a trail with my dog,{" "}
