@@ -56,10 +56,32 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
 export const ExperienceSection = () => {
   const experiences = [
     {
+      title: "ML Engineer",
+      company: "Trunk Tools",
+      period: "Sept 2025 – Present",
+      description: [
+        "Launched new Submittal Register product by productionizing NLP research into a Prefect-orchestrated AWS pipeline, delivering an app-ready service end to end",
+        "Led cross-team integration by defining data contracts and coordinating API interfaces between NLP and frontend/app teams, unblocking delivery and aligning pipeline outputs with product requirements",
+        "Drove major latency improvements through parallel execution and pipeline tuning, processing ~3,000-page documents in ~5–8 minutes (~4× faster than early runs, beating <10-minute target)",
+        "Implemented token-efficient consolidation and deduplication across parallelized paths, reducing redundant LLM work while preserving deterministic outputs",
+        "Improved extraction quality through evaluation-driven iteration, achieving ~99.6% IoU on page-range detection and higher section-splitting and data-extraction accuracy",
+        "Optimized source-text highlighting by constraining bounding-box search to predicted pages with ±2-page fallback (capturing ~99.8% of misses), reducing local runtime from 10–15 minutes to ~4–5 minutes while maintaining highlight coverage",
+        "Added production robustness for LLM-dependent steps with retry handling and token-range chunking to prevent request failures and improve pipeline reliability",
+      ],
+      skills: [
+        "Python",
+        "Prefect",
+        "AWS",
+        "LLM",
+        "NLP",
+        "Pipeline Orchestration",
+        "Performance Optimization",
+      ],
+    },
+    {
       title: "ML Architect",
       company: "Skyward IT Solutions",
-      location: "Rockville, MD",
-      period: "Jan 2025 – Present",
+      period: "Jan 2025 – Sept 2025",
       description: [
         "Transformed organization's #1 most popular tool (CMS chat) from rigid path-following to flexible agentic system using Model Context Protocol and custom workflows",
         "Expanded agent capabilities by building MCP integrations with key tools (Slack, Jira, Confluence, Linear, Internet, Code Execution, Vector and SQL DBs)",
@@ -71,11 +93,12 @@ export const ExperienceSection = () => {
         "Onboarded and trained interns and new hires in developing effective agents with the MCP protocol and best practices for LLM-powered applications",
       ],
       skills: [
+        "Python",
+        "AWS",
+        "LLM",
         "MCP",
         "Llama-Index",
         "Terraform",
-        "LLM",
-        "Python",
         "Knowledge Engineering",
         "BM25",
         "Vector Databases",
