@@ -1,8 +1,4 @@
-import Image from "next/image";
-import NavBar from "./components/navbar";
 import ProjectPage from "./components/projectpage";
-import { Project } from "./components/projectpage";
-import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import StackDisplay from "./components/stackdisplay";
@@ -10,9 +6,8 @@ import StackDisplay from "./components/stackdisplay";
 function Patense() {
   return (
     <ProjectPage>
-      <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <h1 className="mb-8 text-center text-5xl font-bold text-gray-900">
+      <div className="container mx-auto max-w-5xl px-4 py-8">
+        <h1 className="mb-8 bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-center text-5xl font-bold text-transparent">
           Patense.local
         </h1>
         <div className="mb-4 flex items-center justify-center">
@@ -28,45 +23,45 @@ function Patense() {
           <Link
             href={"https://github.com/JohnZolton/patense-local"}
             target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-4 py-2 font-medium text-white/80 transition-colors hover:border-fuchsia-400/50 hover:text-fuchsia-200 focus:outline-none"
           >
             <span>View Code</span>
             <Github size={18} />
           </Link>
         </div>
-        <div className="mb-6 rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="mb-6 rounded-2xl border border-white/10 bg-[#0b0b13] p-4">
           <div className="flex flex-row items-center">
-            <span className="mr-2 font-semibold text-gray-700">
+            <span className="mr-2 font-semibold text-white/80">
               Tech Stack:
             </span>
             <StackDisplay stack="vLLM, Next.js, TypeScript, React, tRPC, Prisma" />
           </div>
         </div>
 
-        <div className="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-6 shadow-sm">
-          <p className="text-blue-600">
+        <div className="mb-8 rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-6">
+          <p className="text-cyan-300">
             100% private, local document analysis with LLMs.
           </p>
         </div>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">Features</h2>
-          <ul className="space-y-3 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Features</h2>
+          <ul className="space-y-3 text-white/70">
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>Inventive Feature Extraction</div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>Deep Reference Search</div>
             </li>
           </ul>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             AI Deep Search
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               A lot of what patent attorney&apos;s do is search documents for
               various features. The problem is that takes time and people get
@@ -76,7 +71,7 @@ function Patense() {
             <p>
               So why not have the LLM search the documents? It&apos;s the same
               idea as in{" "}
-              <Link className="text-blue-600 hover:underline" href={"patense"}>
+              <Link className="text-cyan-300 hover:underline" href={"patense"}>
                 Patense.ai
               </Link>
               . Enter a feature, break all the references into chunks (to
@@ -90,8 +85,8 @@ function Patense() {
             </p>
           </div>
         </section>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <div className="space-y-4 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <div className="space-y-4 text-white/70">
             <p>
               This &apos;reads&apos; all the documents and identified any
               sections that may be relevant to your possible inventive feature.
@@ -100,11 +95,11 @@ function Patense() {
             </p>
           </div>
         </section>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Inventive Feature Extraction
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               This uses a similar technique but searching your own
               Specification.
@@ -117,9 +112,9 @@ function Patense() {
             </p>
           </div>
         </section>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">The Tech</h2>
-          <div className="space-y-4 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">The Tech</h2>
+          <div className="space-y-4 text-white/70">
             <p>
               Originally this used a naive queue, then I learned about vLLM and
               continuous batching. Continuous batching is-hang on. In a graphics
@@ -132,7 +127,7 @@ function Patense() {
             </p>
             <p>
               The original project,{" "}
-              <Link href={"patense"} className="text-blue-600 hover:underline">
+              <Link href={"patense"} className="text-cyan-300 hover:underline">
                 Patense.ai
               </Link>
               , used batched concurrent api calls to chatGPT. I chose not to use

@@ -1,8 +1,4 @@
-import Image from "next/image";
-import NavBar from "./components/navbar";
 import ProjectPage from "./components/projectpage";
-import { Project } from "./components/projectpage";
-import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import StackDisplay from "./components/stackdisplay";
@@ -10,9 +6,8 @@ import StackDisplay from "./components/stackdisplay";
 function Patense() {
   return (
     <ProjectPage>
-      <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <h1 className="mb-8 text-center text-5xl font-bold text-gray-900">
+      <div className="container mx-auto max-w-5xl px-4 py-8">
+        <h1 className="mb-8 bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-center text-5xl font-bold text-transparent">
           Patense.ai
         </h1>
         <div className="mb-4 flex items-center justify-center">
@@ -30,38 +25,38 @@ function Patense() {
           <Link
             href={"https://patense.ai"}
             target="_blank"
-            className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="rounded-2xl border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 font-medium text-cyan-200 transition-colors hover:bg-cyan-400/20 focus:outline-none"
           >
             See it live!
           </Link>
           <Link
             href={"https://github.com/JohnZolton/patense.ai"}
             target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-4 py-2 font-medium text-white/80 transition-colors hover:border-fuchsia-400/50 hover:text-fuchsia-200 focus:outline-none"
           >
             <span>View Code</span>
             <Github size={18} />
           </Link>
         </div>
-        <div className="mb-6 rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="mb-6 rounded-2xl border border-white/10 bg-[#0b0b13] p-4">
           <div className="flex flex-row items-center">
-            <span className="mr-2 font-semibold text-gray-700">
+            <span className="mr-2 font-semibold text-white/80">
               Tech Stack:
             </span>
             <StackDisplay stack="Next.js, TypeScript, React, tRPC, Stripe, AWS Lambda, OpenAI" />
           </div>
         </div>
 
-        <div className="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-6 shadow-sm">
-          <p className="text-blue-600">
+        <div className="mb-8 rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-6">
+          <p className="text-cyan-300">
             Patense.ai is a patent prosecution tool to help lawyers analyze
             office actions.
           </p>
         </div>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">Patent 101</h2>
-          <div className="space-y-4 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Patent 101</h2>
+          <div className="space-y-4 text-white/70">
             <p>
               If someone already published your thing, you can&apos;t patent it.
               If you find a feature or combination of features that no one else
@@ -76,11 +71,11 @@ function Patense() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Tool Overview
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Patense.ai extracts every possible inventive feature from a
               specification (the initial document filed that reserves your place
@@ -92,9 +87,9 @@ function Patense() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">V1 - Naive</h2>
-          <div className="space-y-4 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">V1 - Naive</h2>
+          <div className="space-y-4 text-white/70">
             <p>
               V1 executed a single walk through the specification. 1-2 page
               chunks were sent one at a time to GPT-3.5 along with a running
@@ -106,11 +101,11 @@ function Patense() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             V2 - O(log(n))
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               V2: Split the entire specification into short 1-2 page chunks,
               send all chunks in parallel to separate GPT calls asking it to
@@ -126,11 +121,11 @@ function Patense() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Vector Databases
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Once all the possible inventive features are extracted, the cited
               references are split into small chunks, converted to vectors, and
@@ -161,9 +156,9 @@ function Patense() {
             </p>
           </div>
         </section>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">V3 - $$$</h2>
-          <div className="space-y-4 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">V3 - $$$</h2>
+          <div className="space-y-4 text-white/70">
             <p>Vector DBs aren&apos;t viable, so what is?</p>
             <p>
               What&apos;s more precise than a vector search? Sending the whole
@@ -186,11 +181,11 @@ function Patense() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             App Structure
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               The user uploads a PDF of the specification and all the cited
               references. Documents are stored using UploadThing, a

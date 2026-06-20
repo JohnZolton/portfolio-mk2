@@ -67,6 +67,9 @@ export const ExperienceSection = () => {
         "Improved extraction quality through evaluation-driven iteration, achieving ~99.6% IoU on page-range detection and higher section-splitting and data-extraction accuracy",
         "Optimized source-text highlighting by constraining bounding-box search to predicted pages with ±2-page fallback (capturing ~99.8% of misses), reducing local runtime from 10–15 minutes to ~4–5 minutes while maintaining highlight coverage",
         "Added production robustness for LLM-dependent steps with retry handling and token-range chunking to prevent request failures and improve pipeline reliability",
+        "Supported Submittal Review v3 stabilization on TRACI, helping reduce failed-run rates from ~20–30% to ≤1% through production hardening and targeted fixes",
+        "Refactored agent orchestration patterns for improved clarity, maintainability, and reliability",
+        "Provided critical bug-fix coverage during senior engineer PTO, keeping releases on track",
       ],
       skills: [
         "Python",

@@ -1,8 +1,4 @@
-import Image from "next/image";
-import NavBar from "./components/navbar";
 import ProjectPage from "./components/projectpage";
-import { Project } from "./components/projectpage";
-import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import StackDisplay from "./components/stackdisplay";
@@ -10,16 +6,15 @@ import StackDisplay from "./components/stackdisplay";
 function Patense() {
   return (
     <ProjectPage>
-      <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl p-2 text-xl">
-        <h1 className="mb-8 text-center text-6xl font-bold">
+      <div className="container mx-auto max-w-5xl p-2 text-xl text-white/80">
+        <h1 className="mb-8 text-center text-6xl font-bold bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
           Tabby-API-Ollama
         </h1>
         <div className="mx-auto my-2 flex max-w-xs flex-row items-center justify-center  px-10">
           <Link
             href={"https://github.com/JohnZolton/tabbyAPI-ollama"}
             target="_blank"
-            className={buttonVariants({ variant: "default" })}
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-10 px-4 py-2 border border-white/15 bg-white/5 hover:border-fuchsia-400/50 hover:text-fuchsia-200 text-white/80 transition-colors"
           >
             <div className="mr-2">View Code</div>
             <Github />

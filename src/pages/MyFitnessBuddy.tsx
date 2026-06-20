@@ -1,8 +1,5 @@
 import Image from "next/image";
-import NavBar from "./components/navbar";
 import ProjectPage from "./components/projectpage";
-import { Project } from "./components/projectpage";
-import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import StackDisplay from "./components/stackdisplay";
@@ -10,9 +7,8 @@ import StackDisplay from "./components/stackdisplay";
 function MyFitnessBuddy() {
   return (
     <ProjectPage>
-      <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <h1 className="mb-8 text-center text-5xl font-bold text-gray-900">
+      <div className="container mx-auto max-w-5xl px-4 py-8">
+        <h1 className="mb-8 bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-center text-5xl font-bold text-transparent">
           My Fitness Buddy
         </h1>
         <div className="mb-4 flex items-center justify-center">
@@ -28,59 +24,59 @@ function MyFitnessBuddy() {
           <Link
             href={"https://github.com/JohnZolton/fitness-production"}
             target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-4 py-2 font-medium text-white/80 transition-colors hover:border-fuchsia-400/50 hover:text-fuchsia-200 focus:outline-none"
           >
             <span>View Code</span>
             <Github size={18} />
           </Link>
         </div>
-        <div className="mb-6 rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="mb-6 rounded-2xl border border-white/10 bg-[#0b0b13] p-4">
           <div className="flex flex-row items-center">
-            <span className="mr-2 font-semibold text-gray-700">
+            <span className="mr-2 font-semibold text-white/80">
               Tech Stack:
             </span>
             <StackDisplay stack="Django, Postgres, Stripe, USDA API, Garmin API Wrapper" />
           </div>
         </div>
 
-        <div className="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-6 shadow-sm">
-          <h3 className="mb-2 text-xl font-semibold text-blue-700">
+        <div className="mb-8 rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-6">
+          <h3 className="mb-2 text-xl font-semibold text-cyan-300">
             All-in-One Health Monitoring Website
           </h3>
-          <p className="text-blue-600">
+          <p className="text-cyan-300">
             This was my first &apos;real&apos; web app and it&apos;s kind of
             cringe but it&apos;s staying up here for posterity.
           </p>
         </div>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Key Features
           </h2>
-          <ul className="space-y-3 text-gray-600">
+          <ul className="space-y-3 text-white/70">
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>Automatic syncing with smartwatch data</div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>Querying nutrition data from the USDA food database</div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>Customizable nutrition goals</div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>Auto-repeating meals</div>
             </li>
           </ul>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Smart Search Bar
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Our search bar uses JavaScript to fetch data results for the
               desired food, featuring an autocomplete dropdown menu.
@@ -88,11 +84,11 @@ function MyFitnessBuddy() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Daily Log and Nutrition Tracking
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               After performing a search, users can add any resulting food and
               quantity to their daily log. With edit and remove buttons
@@ -103,11 +99,11 @@ function MyFitnessBuddy() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Settings and Syncing
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Users can update their macronutrient targets (protein, carbs,
               fats), fiber, and enamble syncing step counts from their Garmin
@@ -120,11 +116,11 @@ function MyFitnessBuddy() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Visual Data Representation
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Daily total steps, body weight, and calories are displayed on
               three interactive charts using Chart.js, providing users with a

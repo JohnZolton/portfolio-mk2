@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>John Zolton</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        width: 100%; height: 100%;
+        overflow: hidden;
+        background: #0e0d0b;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        cursor: default;
+      }
+
+      .page {
+        position: relative;
+        width: 100vw; height: 100vh;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .atm {
+        position: absolute; inset: -10%;
+        pointer-events: none; z-index: 0;
+      }
+
+      #stage { position: absolute; inset: 0; overflow: hidden; }
+
+      /* Hidden video — decoded in background, frames drawn to canvas */
+      #vid {
+        position: fixed;
+        top: -1px; left: -1px;
+        width: 1px; height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Visible canvas — shows the chroma-keyed character.
+         drop-shadow follows the alpha channel so it wraps
+         around her actual silhouette, not a rectangle. */
+      #display {
+        position: absolute;
+        pointer-events: none;
+        z-index: 10;
+        filter: drop-shadow(0 3px 14px rgba(255, 210, 70, 0.22))
+                drop-shadow(0 0 5px rgba(255, 210, 70, 0.08));
+      }
+
+      /* ── Text ─────────────────────────────────────────────────── */
+      .t-title, .t-sub, .t-body, .t-foot {
+        position: absolute;
+        white-space: pre;
+        user-select: text;
+        cursor: text;
+        z-index: 1;
+      }
+
+      .t-body { transition: color 90ms ease; }
+      .t-body:hover { color: rgba(255, 200, 58, 0.92) !important; }
+
+      .t-foot a { color: inherit; text-decoration: none; }
+      .t-foot a:hover {
+        color: rgba(255, 200, 58, 0.75);
+        text-decoration: underline;
+      }
+
+      #credit {
+        position: fixed;
+        bottom: 14px; right: 18px;
+        font: 10px/1.3 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 0.04em;
+        color: rgba(234, 226, 210, 0.22);
+        z-index: 20;
+        user-select: none;
+      }
+      #credit a { color: inherit; text-decoration: none; }
+      #credit a:hover {
+        color: rgba(234, 226, 210, 0.5);
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="atm" style="
+        background:
+          radial-gradient(55% 45% at 88% 8%,  rgba(255,188,48,0.07) 0%, transparent 65%),
+          radial-gradient(40% 38% at 12% 94%, rgba(68,100,155,0.06) 0%, transparent 62%);
+      "></div>
+
+      <div id="stage"></div>
+      <video id="vid" src="/chika.mp4" loop muted playsinline></video>
+      <canvas id="display"></canvas>
+
+      <p id="credit">
+        layout by
+        <a href="https://github.com/chenglou/pretext" target="_blank" rel="noopener">pretext</a>
+      </p>
+    </main>
+
+    <script type="module">
+      import { prepareWithSegments, layoutNextLine }
+        from 'https://esm.sh/@chenglou/pretext@0.0.3'
+
+      /* ═══════════════════════════════════════════════════════════════
+         CONTENT
+      ═══════════════════════════════════════════════════════════════ */
+      const TITLE    = 'JOHN ZOLTON'
+      const SUBTITLE = 'ML Engineer  ·  Patent Attorney turned Builder'
+
+      const BODY =
+        'Patent attorney turned software engineer. I heard AI was going ' +
+        "to take my job so I'm doing my part to speed it up. " +
+        'ML Engineer at Trunk Tools, building NLP pipelines that turn ' +
+        'thousands of pages of construction documents into structured ' +
+        'data in minutes. Previously ML Architect at Skyward IT, shipping ' +
+        'MCP integrations with Slack, Jira, Confluence, and custom tooling, ' +
+        'turning rigid chatbots into flexible agentic systems that actually do things. ' +
+        'SocraticSensei.xyz — AI-powered study platform for law students. ' +
+        'Spaced repetition, knowledge-grounded LLMs, Socratic guidance ' +
+        'anchored to your own course notes. No hallucinations. ' +
+        'Patense.ai — patent document analysis for attorneys. 300% faster ' +
+        'prior-art search via prompt engineering. Patense.local, a 100% ' +
+        'local LLM fork for privacy-first firms. ' +
+        'Snorkle — deep document search with fully local LLMs. ' +
+        'Generic fork of Patense.local. 24 GitHub stars. ' +
+        'Liftr.club — bodybuilding training app with biofeedback-driven ' +
+        'progressive overload and custom auth via Nostr public/private keys. ' +
+        'Scribe — real-time voice-to-text transcription using Whisper. ' +
+        '50 GitHub stars, 15 forks. ' +
+        "When I'm not at the computer or staring into the abyss, " +
+        "I'm usually on a trail with my dog Murph."
+
+      /* ═══════════════════════════════════════════════════════════════
+         CONFIG
+      ═══════════════════════════════════════════════════════════════ */
+      const VW = 280, VH = 158              // video native resolution
+      const MARGIN   = 54                   // page edge margin, px
+      const BODY_SZ  = 17                   // body text size, px
+      const LINE_H   = 28                   // body line height, px
+      const H_PAD    = 14                   // horizontal text clearance from silhouette
+      const V_PAD    = 6                    // vertical text clearance from silhouette
+      const MIN_SLOT = 52                   // narrowest slot that will receive text
+
+      const FF  = '"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,serif'
+      const SFF = '"Helvetica Neue",Helvetica,Arial,sans-serif'
+      const BODY_FONT = `${BODY_SZ}px ${FF}`
+
+      /* ═══════════════════════════════════════════════════════════════
+         DOM SETUP
+      ═══════════════════════════════════════════════════════════════ */
+      const stage = document.getElementById('stage')
+      const vid   = document.getElementById('vid')
+      const disp  = document.getElementById('display')
+      const dctx  = disp.getContext('2d')
+
+      // Offscreen canvas at video resolution — pixel processing happens here
+      const oc   = document.createElement('canvas')
+      oc.width   = VW
+      oc.height  = VH
+      const octx = oc.getContext('2d', { willReadFrequently: true })
+
+      // Title
+      const titleEl = document.createElement('h1')
+      titleEl.className = 't-title'
+      titleEl.textContent = TITLE
+      stage.appendChild(titleEl)
+
+      // Subtitle
+      const subEl = document.createElement('p')
+      subEl.className = 't-sub'
+      subEl.textContent = SUBTITLE
+      stage.appendChild(subEl)
+
+      // Footer contact (positioned once, never updated per-frame)
+      const footEl = document.createElement('p')
+      footEl.className = 't-foot'
+      footEl.innerHTML =
+        '<a href="https://github.com/JohnZolton" target="_blank" rel="noopener">' +
+        'github.com/JohnZolton</a>  ·  ' +
+        '<a href="mailto:john@zolton.xyz">john@zolton.xyz</a>  ·  ' +
+        '<a href="/John Zolton Resume.pdf" target="_blank">résumé</a>'
+      footEl.style.cssText = [
+        'position:absolute',
+        `left:${MARGIN}px`,
+        `bottom:${MARGIN - 12}px`,
+        `font:10px/1.5 ${SFF}`,
+        'letter-spacing:0.13em',
+        'text-transform:uppercase',
+        'color:rgba(234,226,210,0.30)',
+        'white-space:nowrap',
+        'z-index:2',
+      ].join(';')
+      stage.appendChild(footEl)
+
+      // Body-line span pool (recycled each frame)
+      const pool = []
+      function pool_sync(n) {
+        while (pool.length < n) {
+          const el = document.createElement('span')
+          el.className = 't-body'
+          stage.appendChild(el)
+          pool.push(el)
+        }
+        for (let i = 0; i < pool.length; i++)
+          pool[i].style.display = i < n ? '' : 'none'
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         CHROMA KEY + PER-ROW SCANLINE BOUNDS
+
+         Every frame we:
+         1. Draw the current video frame to the offscreen canvas
+         2. Walk every pixel — if it's "green screen green", punch the
+            alpha to 0. Otherwise record it as part of the character.
+         3. For each row, store the leftmost and rightmost opaque pixel.
+            These scanline bounds are used as per-band obstacles for
+            the text layout, so the text wraps around the actual arms,
+            hair, dress hem — not a bounding box.
+
+         At 280×158 = 44 240 pixels this takes <0.5 ms on any
+         modern machine.
+      ═══════════════════════════════════════════════════════════════ */
+      const rowBounds = new Array(VH) // per-row: { left, right } | null
+
+      function processVideoFrame() {
+        if (vid.readyState < 2) return false // not enough data yet
+
+        octx.drawImage(vid, 0, 0, VW, VH)
+        const imgData = octx.getImageData(0, 0, VW, VH)
+        const d = imgData.data
+
+        for (let row = 0; row < VH; row++) {
+          let left = VW, right = -1
+          const off = row * VW * 4
+          for (let x = 0; x < VW; x++) {
+            const i = off + x * 4
+            const r = d[i], g = d[i + 1], b = d[i + 2]
+            // Green-screen test: green channel clearly dominant
+            if (g > 80 && g > r * 1.3 && g > b * 1.3) {
+              d[i + 3] = 0 // punch to transparent
+            } else {
+              if (x < left)  left = x
+              if (x > right) right = x
+            }
+          }
+          rowBounds[row] = right >= left ? { left, right: right + 1 } : null
+        }
+
+        octx.putImageData(imgData, 0, 0)
+        return true
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         OBSTACLE LOOKUP — per text-line band
+
+         Given a text line band [bandTop, bandBottom] in page coords,
+         map it into video rows, scan the corresponding rowBounds,
+         and return the tightest horizontal interval (in page coords)
+         that encompasses the character at that height.
+      ═══════════════════════════════════════════════════════════════ */
+      function getObstacleForBand(cX, cY, scale, bandTop, bandBottom) {
+        const r0 = Math.max(0,  Math.floor((bandTop  - V_PAD - cY) / scale))
+        const r1 = Math.min(VH, Math.ceil( (bandBottom + V_PAD - cY) / scale))
+        if (r0 >= VH || r1 <= 0) return null
+
+        let minL = VW, maxR = -1
+        for (let y = Math.max(0, r0); y < Math.min(VH, r1); y++) {
+          const b = rowBounds[y]
+          if (b) {
+            if (b.left  < minL) minL = b.left
+            if (b.right > maxR) maxR = b.right
+          }
+        }
+        if (maxR < minL) return null
+
+        return {
+          left:  cX + minL * scale - H_PAD,
+          right: cX + maxR * scale + H_PAD,
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         SLOT CARVING
+         Given a full-width region [lo, hi] and one blocked interval,
+         return the remaining unblocked slots.
+      ═══════════════════════════════════════════════════════════════ */
+      function carve_slots(lo, hi, iv) {
+        if (!iv) return [{ left: lo, right: hi }]
+        const oL = Math.max(lo, iv.left)
+        const oR = Math.min(hi, iv.right)
+        if (oL >= oR) return [{ left: lo, right: hi }]
+        const slots = []
+        if (oL > lo) slots.push({ left: lo, right: oL })
+        if (oR < hi) slots.push({ left: oR, right: hi })
+        return slots
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         TEXT LAYOUT  (pretext)
+      ═══════════════════════════════════════════════════════════════ */
+      await document.fonts.ready
+      const prepared = prepareWithSegments(BODY, BODY_FONT)
+
+      function do_layout(pw, ph, cX, cY, scale) {
+        const tsz = Math.max(28, Math.min(60, pw * 0.047))
+        const tlh = Math.round(tsz * 1.08)
+        const ssz = Math.max(10, Math.min(13, pw * 0.0108))
+        const tX  = MARGIN
+        const tY  = MARGIN
+        const sY  = tY + tlh + 8
+        const bY  = sY + ssz + 26    // body text top
+        const fY  = ph - MARGIN      // body text bottom
+
+        const regionL = MARGIN
+        const regionR = pw - MARGIN
+        const lines   = []
+        let cursor    = { segmentIndex: 0, graphemeIndex: 0 }
+        let y         = bY
+
+        while (y + LINE_H <= fY) {
+          const iv    = getObstacleForBand(cX, cY, scale, y, y + LINE_H)
+          const slots = carve_slots(regionL, regionR, iv)
+
+          // pick the widest slot
+          let best = null, bestW = 0
+          for (const s of slots) {
+            const w = s.right - s.left
+            if (w > bestW) { bestW = w; best = s }
+          }
+          if (!best || bestW < MIN_SLOT) { y += LINE_H; continue }
+
+          const line = layoutNextLine(prepared, cursor, bestW)
+          if (!line) break
+
+          lines.push({ x: Math.round(best.left), y: Math.round(y), t: line.text })
+          cursor = line.end
+          y += LINE_H
+        }
+
+        return { tsz, tlh, ssz, tX, tY, sY, lines }
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         RENDER LOOP
+      ═══════════════════════════════════════════════════════════════ */
+      try { await vid.play() } catch (_) { /* may need user gesture */ }
+
+      let prevW = 0, prevH = 0
+
+      function frame(now) {
+        const pw = document.documentElement.clientWidth
+        const ph = document.documentElement.clientHeight
+
+        // ── display scale: character occupies a comfortable portion of the viewport
+        const scale = Math.min(pw / VW * 0.5, ph / VH * 0.85)
+        const dispW = Math.round(VW * scale)
+        const dispH = Math.round(VH * scale)
+
+        // ── slow canvas drift so she covers more of the page
+        const driftR = Math.min(pw, ph) * 0.06
+        const cX = Math.round(pw / 2 - dispW / 2 + driftR * Math.cos(now * 0.00008))
+        const cY = Math.round(ph / 2 - dispH / 2 + driftR * Math.sin(now * 0.00012))
+
+        // ── video → chroma key → scanline bounds
+        const hasFrame = processVideoFrame()
+
+        // ── draw keyed frame to display canvas
+        if (dispW !== prevW || dispH !== prevH) {
+          disp.width  = dispW
+          disp.height = dispH
+          prevW = dispW
+          prevH = dispH
+        } else {
+          dctx.clearRect(0, 0, dispW, dispH)
+        }
+        if (hasFrame) {
+          dctx.imageSmoothingEnabled = true
+          dctx.drawImage(oc, 0, 0, dispW, dispH)
+        }
+        disp.style.left = `${cX}px`
+        disp.style.top  = `${cY}px`
+
+        // ── text layout
+        const L = do_layout(pw, ph, cX, cY, scale)
+
+        // ── update DOM: title
+        titleEl.style.cssText = [
+          `left:${L.tX}px`, `top:${L.tY}px`,
+          `font:700 ${L.tsz}px/${L.tlh}px ${FF}`,
+          'letter-spacing:0.06em',
+          'color:rgba(235,228,215,0.95)',
+          'white-space:nowrap', 'z-index:2',
+        ].join(';')
+
+        // ── update DOM: subtitle
+        subEl.style.cssText = [
+          `left:${L.tX + 2}px`, `top:${L.sY}px`,
+          `font:${L.ssz}px/1.3 ${SFF}`,
+          'letter-spacing:0.14em', 'text-transform:uppercase',
+          'color:rgba(235,228,215,0.36)',
+          'white-space:nowrap', 'z-index:2',
+        ].join(';')
+
+        // ── update DOM: body lines
+        pool_sync(L.lines.length)
+        for (let i = 0; i < L.lines.length; i++) {
+          const el = pool[i]
+          const ln = L.lines[i]
+          if (el.textContent !== ln.t) el.textContent = ln.t
+          el.style.cssText = [
+            `left:${ln.x}px`, `top:${ln.y}px`,
+            `font:${BODY_FONT}`, `line-height:${LINE_H}px`,
+            'color:rgba(234,226,210,0.77)',
+          ].join(';')
+        }
+
+        requestAnimationFrame(frame)
+      }
+
+      requestAnimationFrame(frame)
+    </script>
+  </body>
+</html>
