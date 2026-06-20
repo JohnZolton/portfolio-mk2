@@ -1,8 +1,4 @@
-import Image from "next/image";
-import NavBar from "./components/navbar";
 import ProjectPage from "./components/projectpage";
-import { Project } from "./components/projectpage";
-import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import StackDisplay from "./components/stackdisplay";
@@ -10,9 +6,8 @@ import StackDisplay from "./components/stackdisplay";
 function SocraticSensei() {
   return (
     <ProjectPage>
-      <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <h1 className="mb-8 text-center text-5xl font-bold text-gray-900">
+      <div className="container mx-auto max-w-5xl px-4 py-8">
+        <h1 className="mb-8 text-center text-5xl font-bold bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
           Socratic Sensei
         </h1>
         <div className="mb-4 flex items-center justify-center">
@@ -30,31 +25,31 @@ function SocraticSensei() {
           <Link
             href={"https://socraticsensei.xyz"}
             target="_blank"
-            className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="rounded-2xl border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 font-medium text-cyan-200 transition-colors hover:bg-cyan-400/20 focus:outline-none"
           >
             See it live!
           </Link>
           <Link
             href={"https://github.com/JohnZolton/socraticsensei"}
             target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-4 py-2 font-medium text-white/80 transition-colors hover:border-fuchsia-400/50 hover:text-fuchsia-200 focus:outline-none"
           >
             <span>View Code</span>
             <Github size={18} />
           </Link>
         </div>
-        <div className="mb-6 rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="mb-6 rounded-2xl border border-white/10 bg-[#0b0b13] p-4">
           <div className="flex flex-row items-center">
-            <span className="mr-2 font-semibold text-gray-700">
+            <span className="mr-2 font-semibold text-white/80">
               Tech Stack:
             </span>
             <StackDisplay stack="Next.js, TypeScript, React, tRPC, Stripe, AWS Lambda, Google Gemini" />
           </div>
         </div>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">The Problem</h2>
-          <div className="space-y-4 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">The Problem</h2>
+          <div className="space-y-4 text-white/70">
             <p>
               Law student&apos;s entire careers depend on their ability to
               master issue-spotting exams.
@@ -65,11 +60,11 @@ function SocraticSensei() {
             </p>
           </div>
         </section>
-        <div className="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-6 shadow-sm">
-          <p className="mb-4 text-xl font-semibold text-blue-700">
+        <div className="mb-8 rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-6">
+          <p className="mb-4 text-xl font-semibold text-cyan-300">
             Socratic Sensei fixes this.
           </p>
-          <p className="text-blue-600">
+          <p className="text-cyan-300">
             Socratic Sensei is a legal education platform that provides custom
             issue-spotting essays tailored to each specific student&apos;s
             current study needs, powered by AI and spaced repetition algorithms
@@ -78,11 +73,11 @@ function SocraticSensei() {
           </p>
         </div>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             Law School TL/DR
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Law students spend the entire semester reading and then cram for
               two weeks preparing for a special kind of essay - an &quot;Issue
@@ -99,11 +94,11 @@ function SocraticSensei() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             How it works
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>Upload your course notes.</p>
             <p>
               Our AI will parse your notes into actionable flashcards of key
@@ -130,31 +125,31 @@ function SocraticSensei() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">Benefits</h2>
-          <ul className="space-y-3 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Benefits</h2>
+          <ul className="space-y-3 text-white/70">
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Personalized Learning:
                 </span>{" "}
                 Custom essays tailored to your specific knowledge gaps
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Immediate Feedback:
                 </span>{" "}
                 Get instant grading and analysis instead of waiting weeks
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Efficient Study:
                 </span>{" "}
                 Focus on what you need to learn, not what you&apos;ve already
@@ -162,9 +157,9 @@ function SocraticSensei() {
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   AI Guidance:
                 </span>{" "}
                 Built-in Socratic mentor to help guide your thinking

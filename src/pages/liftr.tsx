@@ -1,8 +1,4 @@
-import Image from "next/image";
-import NavBar from "./components/navbar";
 import ProjectPage from "./components/projectpage";
-import { Project } from "./components/projectpage";
-import { Button, buttonVariants } from "../../src/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import StackDisplay from "./components/stackdisplay";
@@ -10,9 +6,8 @@ import StackDisplay from "./components/stackdisplay";
 function Liftr() {
   return (
     <ProjectPage>
-      <NavBar></NavBar>
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <h1 className="mb-8 text-center text-5xl font-bold text-gray-900">
+      <div className="container mx-auto max-w-5xl px-4 py-8">
+        <h1 className="mb-8 text-center text-5xl font-bold bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
           Liftr
         </h1>
         <div className="mb-4 flex items-center justify-center">
@@ -28,30 +23,30 @@ function Liftr() {
           <Link
             href={"https://liftr.club"}
             target="_blank"
-            className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="rounded-2xl border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 font-medium text-cyan-200 transition-colors hover:bg-cyan-400/20 focus:outline-none"
           >
             See it live!
           </Link>
           <Link
             href={"https://github.com/JohnZolton/lyfter"}
             target="_blank"
-            className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-4 py-2 font-medium text-white/80 transition-colors hover:border-fuchsia-400/50 hover:text-fuchsia-200 focus:outline-none"
           >
             <span>View Code</span>
             <Github size={18} />
           </Link>
         </div>
-        <div className="mb-6 rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="mb-6 rounded-2xl border border-white/10 bg-[#0b0b13] p-4">
           <div className="flex flex-row items-center">
-            <span className="mr-2 font-semibold text-gray-700">
+            <span className="mr-2 font-semibold text-white/80">
               Tech Stack:
             </span>
             <StackDisplay stack="Nostr, Next.js, TypeScript, React, tRPC, Prisma" />
           </div>
         </div>
 
-        <div className="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-6 shadow-sm">
-          <p className="text-blue-600">
+        <div className="mb-8 rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-6">
+          <p className="text-cyan-300">
             Liftr is a workout tracking and coaching application that uses
             biofeedback to tailor workout planning (weight, reps and sets
             progression) for bodybuilding. Inspired by the match-or-beat
@@ -60,11 +55,11 @@ function Liftr() {
           </p>
         </div>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             The Algorithm
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Workouts are planned based on the match-or-beat system. It
               compares your current workout performance to the previous
@@ -80,22 +75,22 @@ function Liftr() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">Features</h2>
-          <ul className="space-y-3 text-gray-600">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Features</h2>
+          <ul className="space-y-3 text-white/70">
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Workout Management:
                 </span>{" "}
                 Easily create, plan, edit, and log your workouts.
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Progress Monitoring:
                 </span>{" "}
                 Keep track of your progress and receive alerts when performance
@@ -103,9 +98,9 @@ function Liftr() {
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Missed Workouts Handling:
                 </span>{" "}
                 Seamlessly handle missed workouts and get back on track without
@@ -113,27 +108,27 @@ function Liftr() {
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Customization:
                 </span>{" "}
                 Choose from premade plans or create your own.
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Target Display:
                 </span>{" "}
                 View target weight and reps for each exercise.
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Add & Remove:
                 </span>{" "}
                 Effortlessly add and remove sets, exercises, and workouts to fit
@@ -141,9 +136,9 @@ function Liftr() {
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">
+                <span className="font-semibold text-white/80">
                   Sign in with Nostr:
                 </span>{" "}
                 Built a custom auth solution using Nostr signed-messages to
@@ -151,20 +146,20 @@ function Liftr() {
               </div>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 mt-1 text-blue-500">•</span>
+              <span className="mr-2 mt-1 text-cyan-400">•</span>
               <div>
-                <span className="font-semibold text-gray-700">Cardio:</span> I
+                <span className="font-semibold text-white/80">Cardio:</span> I
                 caved and added cardio to my bodybuilding app. I had to run IRL
                 and realized how out of shape I was so now I do cardio.
               </div>
             </li>
           </ul>
         </section>
-        <section className="mb-8 rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900">
+        <section className="mb-8 rounded-2xl border border-white/10 bg-[#0b0b13] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">
             State Management
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-white/70">
             <p>
               Initially this was built purely with useState. I was young and
               naive and just trudged through the prop-drilling. I didn&apos;t
